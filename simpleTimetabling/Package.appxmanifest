@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="b7657ddb-b2f7-4885-9e64-d4f2feaf51e1" Publisher="CN=anwigley" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="b7657ddb-b2f7-4885-9e64-d4f2feaf51e1" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="53381adriangolias.SimpleTimetabling" Publisher="CN=B35A71E8-D395-4ADB-9FEE-90EDA1335BBE" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="bfc6fce5-2f0f-4439-b36d-734517e6d682" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>TryMobileApp</DisplayName>
-    <PublisherDisplayName>anwigley</PublisherDisplayName>
+    <DisplayName>Simple Timetabling</DisplayName>
+    <PublisherDisplayName>adriangolias</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,10 +15,17 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="simpleTimetabling.App">
-      <uap:VisualElements DisplayName="simpleTimetabling" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="simpleTimetabling" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+      <uap:VisualElements DisplayName="Simple Timetabling" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Simple Timetabling application. Simplest of them all. Handy for keeping track with your school/college schedule. Create, edit &amp; save your custom timetable that will aways be available to you." BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="time">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="portrait" />
+          <uap:Rotation Preference="landscape" />
+        </uap:InitialRotationPreference>
       </uap:VisualElements>
     </Application>
   </Applications>

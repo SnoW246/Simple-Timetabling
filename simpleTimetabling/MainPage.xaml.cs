@@ -78,8 +78,8 @@ namespace simpleTimetabling
             }
             else
             {
-                ListItems.ItemsSource = items;
-                this.ButtonSave.IsEnabled = true;
+                //ListItems.ItemsSource = items;
+                //this.ButtonSave.IsEnabled = true;
             }
         }
 
@@ -89,7 +89,7 @@ namespace simpleTimetabling
 			// After the MobileService client responds, the item is removed from the list.
             await todoTable.UpdateAsync(item);
             items.Remove(item);
-            ListItems.Focus(Windows.UI.Xaml.FocusState.Unfocused);
+            //ListItems.Focus(Windows.UI.Xaml.FocusState.Unfocused);
 
 #if OFFLINE_SYNC_ENABLED
             await App.MobileService.SyncContext.PushAsync(); // offline sync
@@ -98,21 +98,21 @@ namespace simpleTimetabling
 
         private async void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
-            ButtonRefresh.IsEnabled = false;
+            //ButtonRefresh.IsEnabled = false;
 
 #if OFFLINE_SYNC_ENABLED
             await SyncAsync(); // offline sync
 #endif
             await RefreshTodoItems();
 
-            ButtonRefresh.IsEnabled = true;
+            //ButtonRefresh.IsEnabled = true;
         }
 
         private async void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            var todoItem = new TodoItem { Text = TextInput.Text };
-            TextInput.Text = "";
-            await InsertTodoItem(todoItem);
+            //var todoItem = new TodoItem { Text = TextInput.Text };
+            //TextInput.Text = "";
+            //await InsertTodoItem(todoItem);
         }
 
         private async void CheckBoxComplete_Checked(object sender, RoutedEventArgs e)
@@ -124,31 +124,15 @@ namespace simpleTimetabling
 
         private void TextInput_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter) {
-                ButtonSave.Focus(FocusState.Programmatic);
-            }
+            //if (e.Key == Windows.System.VirtualKey.Enter) {
+            //    ButtonSave.Focus(FocusState.Programmatic);
+            //}
         }
 
-        #region Offline sync
-#if OFFLINE_SYNC_ENABLED
-        private async Task InitLocalStoreAsync()
+        private void button_Click(object sender, RoutedEventArgs e)
         {
-           if (!App.MobileService.SyncContext.IsInitialized)
-           {
-               var store = new MobileServiceSQLiteStore("localstore.db");
-               store.DefineTable<TodoItem>();
-               await App.MobileService.SyncContext.InitializeAsync(store);
-           }
-
-           await SyncAsync();
+            ppup.Height = Window.Current.Bounds.Height;
+            ppup.IsOpen = true;
         }
-
-        private async Task SyncAsync()
-        {
-           await App.MobileService.SyncContext.PushAsync();
-           await todoTable.PullAsync("todoItems", todoTable.CreateQuery());
-        }
-#endif
-        #endregion
     }
 }

@@ -8,138 +8,62 @@
     mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-                <VisualState x:Name="NarrowState">
-                    <VisualState.Setters>
-                        <Setter Target="TitleTextBlock.(TextBlock.FontSize)" Value="32"/>
-                        <Setter Target="TextInput.(FrameworkElement.Margin)">
-                            <Setter.Value>
-                                <Thickness>0,8,8,0</Thickness>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Target="TextInput.(TextBox.MinWidth)" Value="200"/>
-                        <Setter Target="TextInput.(TextBox.MaxWidth)" Value="200"/>
-                        <Setter Target="TextInput.(TextBox.HorizontalAlignment)" Value="Left"/>
-                        <Setter Target="quickStartTask.(QuickStartTask.ShowMinimal)" Value="True"/>
-                        <Setter Target="quickStartTaskQuery.(QuickStartTask.ShowMinimal)" Value="True"/>
-                        <Setter Target="ListItems.(CheckBox.Width)" Value="300"/>
-                        <Setter Target="ItemsGrid.(Grid.Row)" Value="2"/>
-                        <Setter Target="ItemsGrid.(Grid.Column)" Value="0"/>
-                        <Setter Target="ItemsGrid.(Grid.ColumnSpan)" Value="2"/>
-                        <Setter Target="ContentPanel.(Grid.ColumnSpan)" Value="2"/>
-                    </VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-                <VisualState x:Name="WideState">
-                    <VisualState.Setters>
-                        <Setter Target="TitleTextBlock.(TextBlock.FontSize)" Value="45"/>
-                        <Setter Target="TextInput.(FrameworkElement.Margin)">
-                            <Setter.Value>
-                                <Thickness>72,5,10,5</Thickness>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Target="quickStartTask.(QuickStartTask.ShowMinimal)" Value="False"/>
-                        <Setter Target="quickStartTaskQuery.(QuickStartTask.ShowMinimal)" Value="False"/>
-                        <Setter Target="ItemsGrid.(Grid.Row)" Value="1"/>
-                        <Setter Target="ItemsGrid.(Grid.Column)" Value="1"/>
-                        <Setter Target="ItemsGrid.(Grid.ColumnSpan)" Value="1"/>
-                        <Setter Target="ContentPanel.(Grid.ColumnSpan)" Value="1"/>
-                    </VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
 
-        <Grid x:Name="ContentGrid" Margin="12">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Left" Height="700" Margin="10,10,0,0" VerticalAlignment="Top" Width="1260">
+            <Button x:Name="addNewBtn" Content="Add" HorizontalAlignment="Left" Height="89" Margin="10,165,0,0" 
+                    VerticalAlignment="Top" Width="135" Click="button_Click" FontSize="30" FontStyle="Italic" />
+            <Popup x:Name="ppup" IsOpen="False" IsLightDismissEnabled="True" Width="320" HorizontalAlignment="Left">
+                <Popup.ChildTransitions>
+                    <TransitionCollection>
+                        <!--<EdgeUIThemeTransition Edge="Left" />-->
+                        <PaneThemeTransition Edge="Left" />
+                    </TransitionCollection>
+                </Popup.ChildTransitions>
+                <Grid Width="380" Height="{Binding ElementName=flyoutPane, Path=Height}"  Background="{ThemeResource FlyoutBackgroundThemeBrush}" >
+                    <TextBlock Text="additional content will go here" Margin="316,404,-316,-404" />
+                </Grid>
+            </Popup>
 
-            <!--TitleGrid contains the name of the application and page title-->
-            <Grid x:Name="TitleGrid" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,16">
-                <StackPanel>
-                    <TextBlock Foreground="#0094ff" FontFamily="Segoe UI Light" Margin="0,0,0,6">AZURE APP SERVICE</TextBlock>
-                    <TextBlock x:Name="TitleTextBlock" Foreground="Gray" FontFamily="Segoe UI Light" FontSize="20" >Try Mobile Apps</TextBlock>
-                </StackPanel>
+
+            <Grid x:Name="gridTimeSegment" HorizontalAlignment="Left" Height="431" Margin="10,259,0,0" VerticalAlignment="Top" Width="135"/>
+            <Grid HorizontalAlignment="Left" Height="150" Margin="10,10,0,0" VerticalAlignment="Top" Width="1240"/>
+            <TextBlock x:Name="Title" HorizontalAlignment="Left" Height="125" Margin="23,23,0,0" TextWrapping="Wrap" 
+                     Text="Simple Timetabling" VerticalAlignment="Top" Width="1227" FontStyle="Italic" 
+                     FontSize="70" TextAlignment="Center" />
+            <Grid HorizontalAlignment="Left" Height="89" Margin="150,165,0,0" VerticalAlignment="Top" Width="1100" Background="LightBlue">
+                <TextBlock x:Name="monday" HorizontalAlignment="Left" Height="59" Margin="0,15,0,0" TextWrapping="Wrap" 
+                         Text="Monday" VerticalAlignment="Top" Width="159" FontStyle="Italic" 
+                     FontSize="27" TextAlignment="Center" />
+                <TextBlock x:Name="tuesday" HorizontalAlignment="Left" Height="59" Margin="155,15,0,0" TextWrapping="Wrap" 
+                    Text="Tuesday" VerticalAlignment="Top" Width="160" FontStyle="Italic" 
+                    FontSize="27" TextAlignment="Center" />
+                <TextBlock x:Name="wednesday" HorizontalAlignment="Left" Height="59" Margin="311,15,0,0" TextWrapping="Wrap" 
+                    Text="Wednesday" VerticalAlignment="Top" Width="159" FontStyle="Italic" 
+                    FontSize="27" TextAlignment="Center" />
+                <TextBlock x:Name="thursday" HorizontalAlignment="Left" Height="59" Margin="466,15,0,0" TextWrapping="Wrap" 
+                    Text="Thursday" VerticalAlignment="Top" Width="160" FontStyle="Italic" 
+                    FontSize="27" TextAlignment="Center" />
+                <TextBlock x:Name="friday" HorizontalAlignment="Left" Height="59" Margin="622,15,0,0" TextWrapping="Wrap" 
+                    Text="Friday" VerticalAlignment="Top" Width="159" FontStyle="Italic" 
+                    FontSize="27" TextAlignment="Center" />
+                <TextBlock x:Name="saturday" HorizontalAlignment="Left" Height="59" Margin="777,15,0,0" TextWrapping="Wrap" 
+                    Text="Saturday" VerticalAlignment="Top" Width="160" FontStyle="Italic" 
+                    FontSize="27" TextAlignment="Center" />
+                <TextBlock x:Name="sunday" HorizontalAlignment="Left" Height="59" Margin="933,15,0,0" TextWrapping="Wrap" 
+                    Text="Sunday" VerticalAlignment="Top" Width="159" FontStyle="Italic" 
+                    FontSize="27" TextAlignment="Center"/>
             </Grid>
+            <Grid x:Name="gridMonday" HorizontalAlignment="Left" Height="406" Margin="150,259,0,0" VerticalAlignment="Top" Width="155"/>
+            <Grid x:Name="gridTuesday" HorizontalAlignment="Left" Height="406" Margin="305,259,0,0" VerticalAlignment="Top" Width="155"/>
+            <Grid x:Name="gridWednesday" HorizontalAlignment="Left" Height="406" Margin="460,259,0,0" VerticalAlignment="Top" Width="155"/>
+            <Grid x:Name="gridThursday" HorizontalAlignment="Left" Height="406" Margin="615,259,0,0" VerticalAlignment="Top" Width="155"/>
+            <Grid x:Name="gridFriday" HorizontalAlignment="Left" Height="406" Margin="770,259,0,0" VerticalAlignment="Top" Width="155"/>
+            <Grid x:Name="gridSaturday" HorizontalAlignment="Left" Height="406" Margin="930,259,0,0" VerticalAlignment="Top" Width="155"/>
+            <Grid x:Name="gridSunday" HorizontalAlignment="Left" Height="406" Margin="1085,259,0,0" VerticalAlignment="Top" Width="155"/>
+            
 
-            <!--ContentPanel - place additional content here-->
-            <Grid x:Name="ContentPanel" Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <StackPanel Grid.Row="0">
-                    <local:QuickStartTask x:Name="quickStartTask" Number="1" Title="Insert a TodoItem" 
-                                      Description="Enter some text below and click Save to insert a new todo item into your database" />
-
-                    <StackPanel x:Name="addItemPanel" Orientation="Horizontal">
-                        <TextBox Grid.Row="1" MinWidth="300" Margin="5,5,5,5" Name="TextInput" KeyDown="TextInput_KeyDown" Height="44"></TextBox>
-                        <Button Name="ButtonSave" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="0,8,8,8" Click="ButtonSave_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <SymbolIcon Symbol="Add"/>
-                                <TextBlock Margin="5">Save</TextBlock>
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </StackPanel>
-
-            </Grid>
-
-            <Grid x:Name="ItemsGrid" Grid.Row="2" Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="500"/>
-                </Grid.RowDefinitions>
-
-                <RelativePanel Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,10,0">
-                    <local:QuickStartTask x:Name="quickStartTaskQuery" Number="2" Title="Query and Update Data" 
-                                          Description="Click refresh below to load the unfinished TodoItems from your hosted service" 
-                                          />
-                    <Button x:Name="ButtonRefresh" Click="ButtonRefresh_Click" Margin="72,10,0,0" Height="44"
-                            RelativePanel.Below="quickStartTaskQuery"  HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Refresh"/>
-                            <TextBlock Margin="5">Refresh</TextBlock>
-                        </StackPanel>
-                    </Button>
-                </RelativePanel>
-
-                <ScrollViewer Grid.Row="1" Margin="0,10,0,0" 
-                              ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                              VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <ListView x:Name="ListItems">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <CheckBox x:Name="CheckBoxComplete" 
-                                          IsChecked="{Binding Complete, Mode=TwoWay}" 
-                                          Checked="CheckBoxComplete_Checked" 
-                                          MaxWidth="550"
-                                          VerticalAlignment="Center">
-                                    <TextBlock Name="ItemText" Text="{Binding Text}" MaxWidth="550" HorizontalAlignment="Left" TextWrapping="WrapWholeWords"/>
-                                </CheckBox>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </ScrollViewer>
-            </Grid>
         </Grid>
+
     </Grid>
 
 </Page>
