@@ -7,63 +7,147 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Name="MainGrid" Margin="2">
+        <!--Definition of column properties-->
+        <Grid.ColumnDefinitions>
+            <!--Column #1-->
+            <ColumnDefinition Width="10"/>
+            <!--Column #2-->
+            <ColumnDefinition Width="*"/>
+            <!--Column #3-->
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
 
-        <Grid HorizontalAlignment="Left" Height="700" Margin="10,10,0,0" VerticalAlignment="Top" Width="1260">
-            <Button x:Name="addNewBtn" Content="Add" HorizontalAlignment="Left" Height="89" Margin="10,165,0,0" 
-                    VerticalAlignment="Top" Width="135" Click="button_Click" FontSize="30" FontStyle="Italic" />
-            <Popup x:Name="ppup" IsOpen="False" IsLightDismissEnabled="True" Width="320" HorizontalAlignment="Left">
+        <!--Definition of row properties-->
+        <Grid.RowDefinitions>
+            <!--Row #1-->
+            <RowDefinition Height="Auto"/>
+            <!--Row #2-->
+            <RowDefinition Height="*" />
+            <!--Row #3-->
+            <RowDefinition Height="65"/>
+        </Grid.RowDefinitions>
+
+        <!--Definition of border for Row #1 (Top Row)-->
+        <Border Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="1" Background="White" CornerRadius="2" Margin="2"/>
+        <!--Definition of header in Row #1-->
+        <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" Text="Simple Timetabling" 
+                   TextAlignment="Center" FontStyle="Italic" FontSize="40" Foreground="LightBlue" 
+                   TextWrapping="WrapWholeWords" IsTextScaleFactorEnabled="True"/>
+
+        <!--Definition of border for Column #1 (Furthermost Left Side Column)-->
+        <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"  Background="Black" CornerRadius="2" Margin="2"/>
+        <!--Definition of border for Column #3 (Furthermost Right Side Column)-->
+        <Border Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="Gray" CornerRadius="2" Margin="2"/>
+        <!--Definition of border for Row #3 (Bottom Row)-->
+        <Border Grid.Column="1" Grid.Row="2" Background="Yellow" CornerRadius="2" Margin="2"/>
+        <StackPanel Grid.Column="1" Grid.Row="2">
+            <Button x:Name="AddNewBtn" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="ExtraBold" Content="+" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="40" UseLayoutRounding="True" Click="AddNewBtn_Click"/>
+            <Popup x:Name="addNewPopup" IsOpen="False" IsLightDismissEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Popup.ChildTransitions>
                     <TransitionCollection>
                         <!--<EdgeUIThemeTransition Edge="Left" />-->
-                        <PaneThemeTransition Edge="Left" />
+                        <PaneThemeTransition Edge="Bottom" />
                     </TransitionCollection>
                 </Popup.ChildTransitions>
-                <Grid Width="380" Height="{Binding ElementName=flyoutPane, Path=Height}"  Background="{ThemeResource FlyoutBackgroundThemeBrush}" >
-                    <TextBlock Text="additional content will go here" Margin="316,404,-316,-404" />
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Grid.ColumnSpan="3" Background="White" CornerRadius="2" Margin="2"/>
+                    <TextBlock Text="Add Lecture" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="30" Width="449" FontWeight="Bold" FontStyle="Italic" FontSize="24"/>
+
                 </Grid>
             </Popup>
+        </StackPanel>
 
+        <!--Definition of border for Column #2 (Center Timetable Column)-->
+        <Border Grid.Column="1" Grid.Row="1" Background="Magenta" CornerRadius="2" Margin="2"/>
 
-            <Grid x:Name="gridTimeSegment" HorizontalAlignment="Left" Height="431" Margin="10,259,0,0" VerticalAlignment="Top" Width="135"/>
-            <Grid HorizontalAlignment="Left" Height="150" Margin="10,10,0,0" VerticalAlignment="Top" Width="1240"/>
-            <TextBlock x:Name="Title" HorizontalAlignment="Left" Height="125" Margin="23,23,0,0" TextWrapping="Wrap" 
-                     Text="Simple Timetabling" VerticalAlignment="Top" Width="1227" FontStyle="Italic" 
-                     FontSize="70" TextAlignment="Center" />
-            <Grid HorizontalAlignment="Left" Height="89" Margin="150,165,0,0" VerticalAlignment="Top" Width="1100" Background="LightBlue">
-                <TextBlock x:Name="monday" HorizontalAlignment="Left" Height="59" Margin="0,15,0,0" TextWrapping="Wrap" 
-                         Text="Monday" VerticalAlignment="Top" Width="159" FontStyle="Italic" 
-                     FontSize="27" TextAlignment="Center" />
-                <TextBlock x:Name="tuesday" HorizontalAlignment="Left" Height="59" Margin="155,15,0,0" TextWrapping="Wrap" 
-                    Text="Tuesday" VerticalAlignment="Top" Width="160" FontStyle="Italic" 
-                    FontSize="27" TextAlignment="Center" />
-                <TextBlock x:Name="wednesday" HorizontalAlignment="Left" Height="59" Margin="311,15,0,0" TextWrapping="Wrap" 
-                    Text="Wednesday" VerticalAlignment="Top" Width="159" FontStyle="Italic" 
-                    FontSize="27" TextAlignment="Center" />
-                <TextBlock x:Name="thursday" HorizontalAlignment="Left" Height="59" Margin="466,15,0,0" TextWrapping="Wrap" 
-                    Text="Thursday" VerticalAlignment="Top" Width="160" FontStyle="Italic" 
-                    FontSize="27" TextAlignment="Center" />
-                <TextBlock x:Name="friday" HorizontalAlignment="Left" Height="59" Margin="622,15,0,0" TextWrapping="Wrap" 
-                    Text="Friday" VerticalAlignment="Top" Width="159" FontStyle="Italic" 
-                    FontSize="27" TextAlignment="Center" />
-                <TextBlock x:Name="saturday" HorizontalAlignment="Left" Height="59" Margin="777,15,0,0" TextWrapping="Wrap" 
-                    Text="Saturday" VerticalAlignment="Top" Width="160" FontStyle="Italic" 
-                    FontSize="27" TextAlignment="Center" />
-                <TextBlock x:Name="sunday" HorizontalAlignment="Left" Height="59" Margin="933,15,0,0" TextWrapping="Wrap" 
-                    Text="Sunday" VerticalAlignment="Top" Width="159" FontStyle="Italic" 
-                    FontSize="27" TextAlignment="Center"/>
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.HorizontalScrollMode="Enabled" >
+            <Grid Grid.Column="1" Grid.Row="1" CornerRadius="2">
+                <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Vertical">
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Height="75" Margin="0,10" Background="Azure">
+                        <TextBlock x:Name="monday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
+                             Text="Monday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
+                             FontSize="30" TextAlignment="Center" Margin="2" />
+                        <TextBlock x:Name="tuesday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
+                        Text="Tuesday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                        <TextBlock x:Name="wednesday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
+                        Text="Wednesday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                        <TextBlock x:Name="thursday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
+                        Text="Thursday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                        <TextBlock x:Name="friday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
+                        Text="Friday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                        <TextBlock x:Name="saturday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
+                        Text="Saturday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                        <TextBlock x:Name="sunday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
+                        Text="Sunday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2">
+                        <StackPanel  x:Name="mondayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Red">
+                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
+
+                            </TextBlock>
+
+                        </StackPanel>
+                        <StackPanel x:Name="tuesdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Blue">
+                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
+
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel x:Name="wednesdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Green">
+                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
+
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel x:Name="thursdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Purple">
+                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
+
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel x:Name="fridayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Orange">
+                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
+
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel x:Name="saturdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="LightCyan">
+                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
+
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel x:Name="sundayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="RosyBrown">
+                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
+
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
             </Grid>
-            <Grid x:Name="gridMonday" HorizontalAlignment="Left" Height="406" Margin="150,259,0,0" VerticalAlignment="Top" Width="155"/>
-            <Grid x:Name="gridTuesday" HorizontalAlignment="Left" Height="406" Margin="305,259,0,0" VerticalAlignment="Top" Width="155"/>
-            <Grid x:Name="gridWednesday" HorizontalAlignment="Left" Height="406" Margin="460,259,0,0" VerticalAlignment="Top" Width="155"/>
-            <Grid x:Name="gridThursday" HorizontalAlignment="Left" Height="406" Margin="615,259,0,0" VerticalAlignment="Top" Width="155"/>
-            <Grid x:Name="gridFriday" HorizontalAlignment="Left" Height="406" Margin="770,259,0,0" VerticalAlignment="Top" Width="155"/>
-            <Grid x:Name="gridSaturday" HorizontalAlignment="Left" Height="406" Margin="930,259,0,0" VerticalAlignment="Top" Width="155"/>
-            <Grid x:Name="gridSunday" HorizontalAlignment="Left" Height="406" Margin="1085,259,0,0" VerticalAlignment="Top" Width="155"/>
-            
+        </ScrollViewer>
 
-        </Grid>
+        
 
     </Grid>
-
 </Page>

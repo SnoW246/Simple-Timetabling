@@ -15,6 +15,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
+
 #if OFFLINE_SYNC_ENABLED
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;  // offline sync
 using Microsoft.WindowsAzure.MobileServices.Sync;         // offline sync
@@ -129,10 +130,52 @@ namespace simpleTimetabling
             //}
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        //private void ScrollChanged(object sender, ScrollChangedEventArgs e)
+        //{
+        //    if (sender == ScrollDays)
+        //    {
+        //        ScrollTimetable.ScrollToVerticalOffset(e.VerticalOffset);
+        //        ScrollTimetable.ScrollToHorizontalOffset(e.HorizontalOffset);
+        //    }
+        //    else
+        //    {
+        //        ScrollDays.ScrollToVerticalOffset(e.VerticalOffset);
+        //        ScrollDays.ScrollToHorizontalOffset(e.HorizontalOffset);
+        //    }
+        //}
+
+        //private async void button_Click(object sender, RoutedEventArgs e)
+        //private async void Showbutton_Click(object sender, RoutedEventArgs e)
+        //{
+            
+            //MessageDialog MyMessage = new MessageDialog("Test", "title");
+            //MyMessage.ShowAsync();
+
+            //Windows.UI.Popups.MessageDialog showDialog = new Windows.UI.Popups.MessageDialog("Add new lecture bellow: ", "Add new");
+
+            // Height is only important if we want the Popup sized to the screen 
+            //addNewPopup.Height = Window.Current.Bounds.Height;
+            //addNewPopup.IsOpen = true;
+
+            //showDialog.Commands.Add(new UICommand("Add") { Id = 0 });
+            //showDialog.Commands.Add(new UICommand("Cancel") { Id = 1 });
+            //var result = await showDialog.ShowAsync();
+            //if ((int)result.Id == 0)
+            //{
+            //    //do your task
+            //}
+            //else
+            //{
+            //    //skip your task
+            //}
+
+        //}
+
+        private void AddNewBtn_Click(object sender, RoutedEventArgs e)
         {
-            ppup.Height = Window.Current.Bounds.Height;
-            ppup.IsOpen = true;
+            addNewPopup.Height = Window.Current.Bounds.Height;
+            addNewPopup.Width = Window.Current.Bounds.Width;
+            addNewPopup.IsOpen = true;
         }
     }
 }
