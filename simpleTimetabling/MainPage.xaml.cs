@@ -26,11 +26,22 @@ namespace simpleTimetabling
     public sealed partial class MainPage : Page
     {
         private MobileServiceCollection<TodoItem, TodoItem> items;
-#if OFFLINE_SYNC_ENABLED
+        #if OFFLINE_SYNC_ENABLED
         private IMobileServiceSyncTable<TodoItem> todoTable = App.MobileService.GetSyncTable<TodoItem>(); // offline sync
-#else
+        #else
         private IMobileServiceTable<TodoItem> todoTable = App.MobileService.GetTable<TodoItem>();
-#endif
+    #endif
+
+        public string NewName { get; set; }
+        public string NewAbbreviation { get; set; }
+        public string NewDay { get; set; }
+        public string NewPlace { get; set; }
+        public int NewStartTime { get; set; }
+        public int NewEndTime { get; set; }
+        //public int time { get; set; }
+        //public int time { get; set; }
+        public string NewLecture { get; set; }
+        public string NewType { get; set; }
 
         public MainPage()
         {
@@ -130,52 +141,13 @@ namespace simpleTimetabling
             //}
         }
 
-        //private void ScrollChanged(object sender, ScrollChangedEventArgs e)
-        //{
-        //    if (sender == ScrollDays)
-        //    {
-        //        ScrollTimetable.ScrollToVerticalOffset(e.VerticalOffset);
-        //        ScrollTimetable.ScrollToHorizontalOffset(e.HorizontalOffset);
-        //    }
-        //    else
-        //    {
-        //        ScrollDays.ScrollToVerticalOffset(e.VerticalOffset);
-        //        ScrollDays.ScrollToHorizontalOffset(e.HorizontalOffset);
-        //    }
-        //}
-
-        //private async void button_Click(object sender, RoutedEventArgs e)
-        //private async void Showbutton_Click(object sender, RoutedEventArgs e)
-        //{
-            
-            //MessageDialog MyMessage = new MessageDialog("Test", "title");
-            //MyMessage.ShowAsync();
-
-            //Windows.UI.Popups.MessageDialog showDialog = new Windows.UI.Popups.MessageDialog("Add new lecture bellow: ", "Add new");
-
-            // Height is only important if we want the Popup sized to the screen 
-            //addNewPopup.Height = Window.Current.Bounds.Height;
-            //addNewPopup.IsOpen = true;
-
-            //showDialog.Commands.Add(new UICommand("Add") { Id = 0 });
-            //showDialog.Commands.Add(new UICommand("Cancel") { Id = 1 });
-            //var result = await showDialog.ShowAsync();
-            //if ((int)result.Id == 0)
-            //{
-            //    //do your task
-            //}
-            //else
-            //{
-            //    //skip your task
-            //}
-
-        //}
 
         private void AddNewBtn_Click(object sender, RoutedEventArgs e)
         {
-            addNewPopup.Height = Window.Current.Bounds.Height;
-            addNewPopup.Width = Window.Current.Bounds.Width;
-            addNewPopup.IsOpen = true;
+            //Name.Text = NewName;
+            t1.Text = Name.Text;
         }
+
+        
     }
 }

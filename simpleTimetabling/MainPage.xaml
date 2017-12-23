@@ -6,8 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Name="MainGrid" Margin="2">
+    
+    <!--Declaration of main grid to hold all content of the application-->
+    <Grid Name="MainGrid" Margin="2" >
+        
         <!--Definition of column properties-->
         <Grid.ColumnDefinitions>
             <!--Column #1-->
@@ -28,6 +30,7 @@
             <RowDefinition Height="65"/>
         </Grid.RowDefinitions>
 
+        
         <!--Definition of border for Row #1 (Top Row)-->
         <Border Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="1" Background="White" CornerRadius="2" Margin="2"/>
         <!--Definition of header in Row #1-->
@@ -41,48 +44,178 @@
         <Border Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="Gray" CornerRadius="2" Margin="2"/>
         <!--Definition of border for Row #3 (Bottom Row)-->
         <Border Grid.Column="1" Grid.Row="2" Background="Yellow" CornerRadius="2" Margin="2"/>
+
         <StackPanel Grid.Column="1" Grid.Row="2">
-            <Button x:Name="AddNewBtn" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="ExtraBold" Content="+" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="40" UseLayoutRounding="True" Click="AddNewBtn_Click"/>
-            <Popup x:Name="addNewPopup" IsOpen="False" IsLightDismissEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Popup.ChildTransitions>
-                    <TransitionCollection>
-                        <!--<EdgeUIThemeTransition Edge="Left" />-->
-                        <PaneThemeTransition Edge="Bottom" />
-                    </TransitionCollection>
-                </Popup.ChildTransitions>
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+            <Button x:Name="FlyoutBtn" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="ExtraBold" Content="+" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="36" UseLayoutRounding="True" Margin="2">
+                <Button.Flyout>
+                    <Flyout Placement="Bottom">
+                        <Grid ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Enabled" Background="DarkGray">
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
 
-                    <Border Grid.Row="0" Grid.ColumnSpan="3" Background="White" CornerRadius="2" Margin="2"/>
-                    <TextBlock Text="Add Lecture" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="30" Width="449" FontWeight="Bold" FontStyle="Italic" FontSize="24"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                </Grid>
-            </Popup>
+                            <Border Grid.Row="0" Grid.ColumnSpan="3" Background="Aqua" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Add New Lecture" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" Height="30" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="1" Grid.Column="0" Background="White" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="2" Grid.Column="0" Background="Gray" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Abbreviation:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="3" Grid.Column="0" Background="PaleGoldenrod" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Day:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="4" Grid.Column="0" Background="PaleGreen" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Place:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="5" Grid.Column="0" Background="PaleVioletRed" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Start Time:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="6" Grid.Column="0" Background="PapayaWhip" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="End Time:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="7" Grid.Column="0" Background="PaleTurquoise" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="7" Grid.Column="0" Text="Lecturer:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="8" Grid.Column="0" Background="Bisque" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="8" Grid.Column="0" Text="Type:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <TextBox Text="{Binding NewName}" Grid.Row="1" Grid.Column="1" x:Name="Name" Margin="2" TextWrapping="Wrap"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="Abbreviation" Margin="2" TextWrapping="Wrap"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" x:Name="Day" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="2">
+                                <ComboBoxItem Content="Monday"/>
+                                <ComboBoxItem Content="Tuesday"/>
+                                <ComboBoxItem Content="Wednesday"/>
+                                <ComboBoxItem Content="Thursday"/>
+                                <ComboBoxItem Content="Friday"/>
+                                <ComboBoxItem Content="Satruday"/>
+                                <ComboBoxItem Content="Sunday"/>
+                            </ComboBox>
+                            <TextBox Grid.Row="4" Grid.Column="1" x:Name="Place" Margin="2" TextWrapping="Wrap"/>
+                            <StackPanel Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
+                                <ComboBox Grid.Row="5" Grid.Column="1" x:Name="StartTimeHour" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <ComboBoxItem Content="00"/>
+                                    <ComboBoxItem Content="01"/>
+                                    <ComboBoxItem Content="02"/>
+                                    <ComboBoxItem Content="03"/>
+                                    <ComboBoxItem Content="04"/>
+                                    <ComboBoxItem Content="05"/>
+                                    <ComboBoxItem Content="06"/>
+                                    <ComboBoxItem Content="07"/>
+                                    <ComboBoxItem Content="08"/>
+                                    <ComboBoxItem Content="09"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="11"/>
+                                    <ComboBoxItem Content="12"/>
+                                    <ComboBoxItem Content="13"/>
+                                    <ComboBoxItem Content="14"/>
+                                    <ComboBoxItem Content="15"/>
+                                    <ComboBoxItem Content="16"/>
+                                    <ComboBoxItem Content="17"/>
+                                    <ComboBoxItem Content="18"/>
+                                    <ComboBoxItem Content="19"/>
+                                    <ComboBoxItem Content="20"/>
+                                    <ComboBoxItem Content="21"/>
+                                    <ComboBoxItem Content="22"/>
+                                    <ComboBoxItem Content="23"/>
+                                </ComboBox>
+                                <ComboBox Grid.Row="5" Grid.Column="1" x:Name="StartTimeMin" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2">
+                                    <ComboBoxItem Content="00"/>
+                                    <ComboBoxItem Content="05"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="15"/>
+                                    <ComboBoxItem Content="20"/>
+                                    <ComboBoxItem Content="25"/>
+                                    <ComboBoxItem Content="30"/>
+                                    <ComboBoxItem Content="35"/>
+                                    <ComboBoxItem Content="40"/>
+                                    <ComboBoxItem Content="45"/>
+                                    <ComboBoxItem Content="50"/>
+                                    <ComboBoxItem Content="55"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
+                                <ComboBox Grid.Row="6" Grid.Column="1" x:Name="EndTimeHour" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <ComboBoxItem Content="00"/>
+                                    <ComboBoxItem Content="01"/>
+                                    <ComboBoxItem Content="02"/>
+                                    <ComboBoxItem Content="03"/>
+                                    <ComboBoxItem Content="04"/>
+                                    <ComboBoxItem Content="05"/>
+                                    <ComboBoxItem Content="06"/>
+                                    <ComboBoxItem Content="07"/>
+                                    <ComboBoxItem Content="08"/>
+                                    <ComboBoxItem Content="09"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="11"/>
+                                    <ComboBoxItem Content="12"/>
+                                    <ComboBoxItem Content="13"/>
+                                    <ComboBoxItem Content="14"/>
+                                    <ComboBoxItem Content="15"/>
+                                    <ComboBoxItem Content="16"/>
+                                    <ComboBoxItem Content="17"/>
+                                    <ComboBoxItem Content="18"/>
+                                    <ComboBoxItem Content="19"/>
+                                    <ComboBoxItem Content="20"/>
+                                    <ComboBoxItem Content="21"/>
+                                    <ComboBoxItem Content="22"/>
+                                    <ComboBoxItem Content="23"/>
+                                </ComboBox>
+                                <ComboBox Grid.Row="6" Grid.Column="1" x:Name="EndTimeMin" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2">
+                                    <ComboBoxItem Content="00"/>
+                                    <ComboBoxItem Content="05"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="15"/>
+                                    <ComboBoxItem Content="20"/>
+                                    <ComboBoxItem Content="25"/>
+                                    <ComboBoxItem Content="30"/>
+                                    <ComboBoxItem Content="35"/>
+                                    <ComboBoxItem Content="40"/>
+                                    <ComboBoxItem Content="45"/>
+                                    <ComboBoxItem Content="50"/>
+                                    <ComboBoxItem Content="55"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <TextBox Grid.Row="7" Grid.Column="1" x:Name="Lecturer" Margin="2" TextWrapping="Wrap"/>
+                            <ComboBox Grid.Row="8" Grid.Column="1" x:Name="Type" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="2">
+                                <ComboBoxItem Content="Lecture"/>
+                                <ComboBoxItem Content="Practical"/>
+                            </ComboBox>
+                            <Button x:Name="AddNewBtn" Grid.Row="1" Grid.Column="2" Grid.RowSpan="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="ExtraBold" Content="+" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="36" UseLayoutRounding="True" Margin="2" Click="AddNewBtn_Click"/>
+                        </Grid>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
         </StackPanel>
 
         <!--Definition of border for Column #2 (Center Timetable Column)-->
-        <Border Grid.Column="1" Grid.Row="1" Background="Magenta" CornerRadius="2" Margin="2"/>
+        <Border Grid.Column="1" Grid.Row="1" CornerRadius="2" Margin="2">
+            <Image Source="Assets/OldBooksBckground.jpg" Stretch="UniformToFill"/>
+        </Border>
+
+
 
         <ScrollViewer Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.HorizontalScrollMode="Enabled" >
             <Grid Grid.Column="1" Grid.Row="1" CornerRadius="2">
+
                 <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Vertical">
-                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Height="75" Margin="0,10" Background="Azure">
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Height="75" Margin="0,10" Background="Azure" Opacity="0.7">
                         <TextBlock x:Name="monday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
                              Text="Monday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
                              FontSize="30" TextAlignment="Center" Margin="2" />
@@ -106,38 +239,38 @@
                         FontSize="30" TextAlignment="Center" Margin="2"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2">
-                        <StackPanel  x:Name="mondayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Red">
-                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
-
+                        <StackPanel  x:Name="mondayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Red" Opacity="0.7">
+                            <TextBlock x:Name="t1" HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
+                                
                             </TextBlock>
 
                         </StackPanel>
-                        <StackPanel x:Name="tuesdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Blue">
-                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
-
-                            </TextBlock>
-                        </StackPanel>
-                        <StackPanel x:Name="wednesdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Green">
+                        <StackPanel x:Name="tuesdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Blue" Opacity="0.7">
                             <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
 
                             </TextBlock>
                         </StackPanel>
-                        <StackPanel x:Name="thursdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Purple">
+                        <StackPanel x:Name="wednesdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Green" Opacity="0.7">
                             <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
 
                             </TextBlock>
                         </StackPanel>
-                        <StackPanel x:Name="fridayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Orange">
+                        <StackPanel x:Name="thursdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Purple" Opacity="0.7">
                             <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
 
                             </TextBlock>
                         </StackPanel>
-                        <StackPanel x:Name="saturdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="LightCyan">
+                        <StackPanel x:Name="fridayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Orange" Opacity="0.7">
                             <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
 
                             </TextBlock>
                         </StackPanel>
-                        <StackPanel x:Name="sundayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="RosyBrown">
+                        <StackPanel x:Name="saturdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="LightCyan" Opacity="0.7">
+                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
+
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel x:Name="sundayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="RosyBrown" Opacity="0.7">
                             <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
 
                             </TextBlock>
@@ -146,8 +279,5 @@
                 </StackPanel>
             </Grid>
         </ScrollViewer>
-
-        
-
     </Grid>
 </Page>
