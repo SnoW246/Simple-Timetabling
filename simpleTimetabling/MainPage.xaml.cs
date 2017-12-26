@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 
@@ -141,13 +142,80 @@ namespace simpleTimetabling
             //}
         }
 
-
         private void AddNewBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Name.Text = NewName;
-            t1.Text = Name.Text;
-        }
+            Border b = new Border();
+            b.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.DarkGray);
+            b.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.White);
+            b.CornerRadius = new CornerRadius(2);
+            b.BorderThickness = new Thickness(2);
+            Thickness bMargin = b.Margin;
+            bMargin.Top = 2;
+            b.Margin = bMargin;
 
-        
+            TextBlock tb = new TextBlock
+            {
+                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+                VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center,
+                TextWrapping = Windows.UI.Xaml.TextWrapping.Wrap,
+                Width = 150
+            };
+            // Set margin of the textblock
+            Thickness tbMargin = tb.Margin;
+            Thickness padding = tb.Padding;
+            tbMargin.Left = 2;
+            padding.Top = 10;
+            tb.Margin = tbMargin;
+            tb.Padding = padding;
+
+
+            tb.Text = Abbreviation.Text.ToString().ToUpper() + "(" + Name.Text + ")" + "\r\n" +
+                Type.SelectionBoxItem.ToString() + "\r\n" + Place.Text + "\r\n" +
+                StartTimeHour.SelectionBoxItem.ToString() + ":" + StartTimeMin.SelectionBoxItem.ToString() + " - " +
+                EndTimeHour.SelectionBoxItem.ToString() + ":" + EndTimeMin.SelectionBoxItem.ToString() + "\r\n" +
+                Lecturer.Text;
+                
+            //tb.Text = "Name: " + Name.Text + "\r\n";
+            //tb.Text += "Abbreviation: " + Abbreviation.Text.ToString().ToUpper() + "\r\n";
+            //tb.Text += "Day: " + Day.SelectionBoxItem.ToString() + "\r\n";
+            //tb.Text += "Place: " + Place.Text + "\r\n";
+            //tb.Text += "Start Time: " + StartTimeHour.SelectionBoxItem.ToString() + ":" + StartTimeMin.SelectionBoxItem.ToString() + "\r\n";
+            //tb.Text += "End Time: " + EndTimeHour.SelectionBoxItem.ToString() + ":" + EndTimeMin.SelectionBoxItem.ToString() + "\r\n";
+            //tb.Text += "Lecturer: " + Lecturer.Text + "\r\n";
+            //tb.Text += "Type: " + Type.SelectionBoxItem.ToString();
+
+            string caseSwitch = Day.SelectionBoxItem.ToString();
+            switch (caseSwitch)
+            {
+                case "Monday":
+                    b.Child = tb;
+                    mondayStack.Children.Add(b);
+                    break;
+                case "Tuesday":
+                    b.Child = tb;
+                    tuesdayStack.Children.Add(b);
+                    break;
+                case "Wednesday":
+                    b.Child = tb;
+                    wednesdayStack.Children.Add(b);
+                    break;
+                case "Thursday":
+                    b.Child = tb;
+                    thursdayStack.Children.Add(b);
+                    break;
+                case "Friday":
+                    b.Child = tb;
+                    fridayStack.Children.Add(b);
+                    break;
+                case "Saturday":
+                    b.Child = tb;
+                    saturdayStack.Children.Add(b);
+                    break;
+                case "Sunday":
+                    b.Child = tb;
+                    sundayStack.Children.Add(b);
+                    break;
+            }// End of switch
+        }     
     }
 }

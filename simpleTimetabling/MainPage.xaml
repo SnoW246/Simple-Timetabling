@@ -96,7 +96,7 @@
                             <Border Grid.Row="8" Grid.Column="0" Background="Bisque" CornerRadius="2" Margin="2"/>
                             <TextBlock Grid.Row="8" Grid.Column="0" Text="Type:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
 
-                            <TextBox Text="{Binding NewName}" Grid.Row="1" Grid.Column="1" x:Name="Name" Margin="2" TextWrapping="Wrap"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" x:Name="Name" Margin="2" TextWrapping="Wrap"/>
                             <TextBox Grid.Row="2" Grid.Column="1" x:Name="Abbreviation" Margin="2" TextWrapping="Wrap"/>
                             <ComboBox Grid.Row="3" Grid.Column="1" x:Name="Day" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="2">
                                 <ComboBoxItem Content="Monday"/>
@@ -104,7 +104,7 @@
                                 <ComboBoxItem Content="Wednesday"/>
                                 <ComboBoxItem Content="Thursday"/>
                                 <ComboBoxItem Content="Friday"/>
-                                <ComboBoxItem Content="Satruday"/>
+                                <ComboBoxItem Content="Saturday"/>
                                 <ComboBoxItem Content="Sunday"/>
                             </ComboBox>
                             <TextBox Grid.Row="4" Grid.Column="1" x:Name="Place" Margin="2" TextWrapping="Wrap"/>
@@ -239,42 +239,13 @@
                         FontSize="30" TextAlignment="Center" Margin="2"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2">
-                        <StackPanel  x:Name="mondayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Red" Opacity="0.7">
-                            <TextBlock x:Name="t1" HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
-                                
-                            </TextBlock>
-
-                        </StackPanel>
-                        <StackPanel x:Name="tuesdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Blue" Opacity="0.7">
-                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
-
-                            </TextBlock>
-                        </StackPanel>
-                        <StackPanel x:Name="wednesdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Green" Opacity="0.7">
-                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
-
-                            </TextBlock>
-                        </StackPanel>
-                        <StackPanel x:Name="thursdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Purple" Opacity="0.7">
-                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
-
-                            </TextBlock>
-                        </StackPanel>
-                        <StackPanel x:Name="fridayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Orange" Opacity="0.7">
-                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
-
-                            </TextBlock>
-                        </StackPanel>
-                        <StackPanel x:Name="saturdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="LightCyan" Opacity="0.7">
-                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
-
-                            </TextBlock>
-                        </StackPanel>
-                        <StackPanel x:Name="sundayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="RosyBrown" Opacity="0.7">
-                            <TextBlock HorizontalAlignment="Center" Height="80" VerticalAlignment="Center" Width="150" Margin="2" >
-
-                            </TextBlock>
-                        </StackPanel>
+                        <StackPanel x:Name="mondayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Red" Opacity="0.7"/>
+                        <StackPanel x:Name="tuesdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Blue" Opacity="0.7"/>
+                        <StackPanel x:Name="wednesdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Green" Opacity="0.7"/>
+                        <StackPanel x:Name="thursdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Purple" Opacity="0.7"/>
+                        <StackPanel x:Name="fridayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Orange" Opacity="0.7"/>
+                        <StackPanel x:Name="saturdayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="LightCyan" Opacity="0.7"/>
+                        <StackPanel x:Name="sundayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="RosyBrown" Opacity="0.7"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
