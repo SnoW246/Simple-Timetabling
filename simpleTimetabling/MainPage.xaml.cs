@@ -9,29 +9,18 @@
 
 using Microsoft.WindowsAzure.MobileServices;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-
-#if OFFLINE_SYNC_ENABLED
-using Microsoft.WindowsAzure.MobileServices.SQLiteStore;  // offline sync
-using Microsoft.WindowsAzure.MobileServices.Sync;         // offline sync
-#endif
 
 namespace simpleTimetabling
 {
     public sealed partial class MainPage : Page
     {
-        private MobileServiceCollection<TodoItem, TodoItem> items;
-        #if OFFLINE_SYNC_ENABLED
-        private IMobileServiceSyncTable<TodoItem> todoTable = App.MobileService.GetSyncTable<TodoItem>(); // offline sync
-        #else
-        private IMobileServiceTable<TodoItem> todoTable = App.MobileService.GetTable<TodoItem>();
-    #endif
+        private MobileServiceCollection<Timetables, Timetables> items;
+        private IMobileServiceTable<Timetables> azureTable = App.MobileService.GetTable<Timetables>();
 
         public string NewName { get; set; }
         public string NewAbbreviation { get; set; }
@@ -47,78 +36,31 @@ namespace simpleTimetabling
         public MainPage()
         {
             this.InitializeComponent();
+            loadAsync();
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        public async Task loadAsync()
         {
-#if OFFLINE_SYNC_ENABLED
-            await InitLocalStoreAsync(); // offline sync
-#endif
-            ButtonRefresh_Click(this, null);
+            items = await azureTable.Take(5).ToCollectionAsync();
+            new Windows.UI.Popups.MessageDialog(
+                items.LastOrDefault().ID 
+                + items.LastOrDefault().Lecture 
+                + items.LastOrDefault().Lecturer 
+                + items.LastOrDefault().Name 
+                + items.LastOrDefault().Time).ShowAsync();
         }
 
-        private async Task InsertTodoItem(TodoItem todoItem)
+        public async Task uploadAsync(String name, String day, String lecture, String lecturer, String time)
         {
-            // This code inserts a new TodoItem into the database. After the operation completes
-            // and the mobile app backend has assigned an id, the item is added to the CollectionView.
-            await todoTable.InsertAsync(todoItem);
-            items.Add(todoItem);
+            var newItem = new Timetables {
+                Name = name,
+                Day = day,
+                Lecture = lecture,
+                Lecturer = lecturer,
+                Time = time
+            };
 
-#if OFFLINE_SYNC_ENABLED
-            await App.MobileService.SyncContext.PushAsync(); // offline sync
-#endif
-        }
-
-        private async Task RefreshTodoItems()
-        {
-            MobileServiceInvalidOperationException exception = null;
-            try
-            {
-                // This code refreshes the entries in the list view by querying the TodoItems table.
-                // The query excludes completed TodoItems.
-                items = await todoTable
-                    .Where(todoItem => todoItem.Complete == false)
-                    .ToCollectionAsync();
-            }
-            catch (MobileServiceInvalidOperationException e)
-            {
-                exception = e;
-            }
-
-            if (exception != null)
-            {
-                await new MessageDialog(exception.Message, "Error loading items").ShowAsync();
-            }
-            else
-            {
-                //ListItems.ItemsSource = items;
-                //this.ButtonSave.IsEnabled = true;
-            }
-        }
-
-        private async Task UpdateCheckedTodoItem(TodoItem item)
-        {
-            // This code takes a freshly completed TodoItem and updates the database.
-			// After the MobileService client responds, the item is removed from the list.
-            await todoTable.UpdateAsync(item);
-            items.Remove(item);
-            //ListItems.Focus(Windows.UI.Xaml.FocusState.Unfocused);
-
-#if OFFLINE_SYNC_ENABLED
-            await App.MobileService.SyncContext.PushAsync(); // offline sync
-#endif
-        }
-
-        private async void ButtonRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            //ButtonRefresh.IsEnabled = false;
-
-#if OFFLINE_SYNC_ENABLED
-            await SyncAsync(); // offline sync
-#endif
-            await RefreshTodoItems();
-
-            //ButtonRefresh.IsEnabled = true;
+            azureTable.InsertAsync(newItem);
         }
 
         private async void ButtonSave_Click(object sender, RoutedEventArgs e)
@@ -126,13 +68,6 @@ namespace simpleTimetabling
             //var todoItem = new TodoItem { Text = TextInput.Text };
             //TextInput.Text = "";
             //await InsertTodoItem(todoItem);
-        }
-
-        private async void CheckBoxComplete_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox cb = (CheckBox)sender;
-            TodoItem item = cb.DataContext as TodoItem;
-            await UpdateCheckedTodoItem(item);
         }
 
         private void TextInput_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
@@ -144,78 +79,94 @@ namespace simpleTimetabling
 
         private void AddNewBtn_Click(object sender, RoutedEventArgs e)
         {
-            Border b = new Border();
-            b.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.DarkGray);
-            b.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.White);
-            b.CornerRadius = new CornerRadius(2);
-            b.BorderThickness = new Thickness(2);
-            Thickness bMargin = b.Margin;
-            bMargin.Top = 2;
-            b.Margin = bMargin;
-
-            TextBlock tb = new TextBlock
+            if (Day.SelectionBoxItem != null)
             {
-                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
-                VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center,
-                TextWrapping = Windows.UI.Xaml.TextWrapping.Wrap,
-                Width = 150
-            };
-            // Set margin of the textblock
-            Thickness tbMargin = tb.Margin;
-            Thickness padding = tb.Padding;
-            tbMargin.Left = 2;
-            padding.Top = 10;
-            tb.Margin = tbMargin;
-            tb.Padding = padding;
+                Border b = new Border();
+                b.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.DarkGray);
+                b.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.White);
+                b.CornerRadius = new CornerRadius(2);
+                b.BorderThickness = new Thickness(2);
+                Thickness bMargin = b.Margin;
+                bMargin.Top = 2;
+                b.Margin = bMargin;
 
+                TextBlock tb = new TextBlock
+                {
+                    HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+                    VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center,
+                    TextWrapping = Windows.UI.Xaml.TextWrapping.Wrap,
+                    Width = 150
+                };
+                // Set margin of the textblock
+                Thickness tbMargin = tb.Margin;
+                Thickness padding = tb.Padding;
+                tbMargin.Left = 2;
+                padding.Top = 10;
+                tb.Margin = tbMargin;
+                tb.Padding = padding;
 
-            tb.Text = Abbreviation.Text.ToString().ToUpper() + "(" + Name.Text + ")" + "\r\n" +
-                Type.SelectionBoxItem.ToString() + "\r\n" + Place.Text + "\r\n" +
-                StartTimeHour.SelectionBoxItem.ToString() + ":" + StartTimeMin.SelectionBoxItem.ToString() + " - " +
-                EndTimeHour.SelectionBoxItem.ToString() + ":" + EndTimeMin.SelectionBoxItem.ToString() + "\r\n" +
-                Lecturer.Text;
-                
-            //tb.Text = "Name: " + Name.Text + "\r\n";
-            //tb.Text += "Abbreviation: " + Abbreviation.Text.ToString().ToUpper() + "\r\n";
-            //tb.Text += "Day: " + Day.SelectionBoxItem.ToString() + "\r\n";
-            //tb.Text += "Place: " + Place.Text + "\r\n";
-            //tb.Text += "Start Time: " + StartTimeHour.SelectionBoxItem.ToString() + ":" + StartTimeMin.SelectionBoxItem.ToString() + "\r\n";
-            //tb.Text += "End Time: " + EndTimeHour.SelectionBoxItem.ToString() + ":" + EndTimeMin.SelectionBoxItem.ToString() + "\r\n";
-            //tb.Text += "Lecturer: " + Lecturer.Text + "\r\n";
-            //tb.Text += "Type: " + Type.SelectionBoxItem.ToString();
+                tb.Text = Abbreviation.Text.ToString().ToUpper() + " (" + Name.Text + ")" + "\r\n" +
+                    Type.SelectionBoxItem.ToString() + "\r\n" + Place.Text + "\r\n" +
+                    StartTimeHour.SelectionBoxItem.ToString() + ":" + StartTimeMin.SelectionBoxItem.ToString() + " - " +
+                    EndTimeHour.SelectionBoxItem.ToString() + ":" + EndTimeMin.SelectionBoxItem.ToString() + "\r\n" +
+                    Lecturer.Text;
 
-            string caseSwitch = Day.SelectionBoxItem.ToString();
-            switch (caseSwitch)
+                //tb.Text = "Name: " + Name.Text + "\r\n";
+                //tb.Text += "Abbreviation: " + Abbreviation.Text.ToString().ToUpper() + "\r\n";
+                //tb.Text += "Day: " + Day.SelectionBoxItem.ToString() + "\r\n";
+                //tb.Text += "Place: " + Place.Text + "\r\n";
+                //tb.Text += "Start Time: " + StartTimeHour.SelectionBoxItem.ToString() + ":" + StartTimeMin.SelectionBoxItem.ToString() + "\r\n";
+                //tb.Text += "End Time: " + EndTimeHour.SelectionBoxItem.ToString() + ":" + EndTimeMin.SelectionBoxItem.ToString() + "\r\n";
+                //tb.Text += "Lecturer: " + Lecturer.Text + "\r\n";
+                //tb.Text += "Type: " + Type.SelectionBoxItem.ToString();
+
+                string caseSwitch = Day.SelectionBoxItem.ToString();
+                switch (caseSwitch)
+                {
+                    case "Monday":
+                        b.Child = tb;
+                        mondayStack.Children.Add(b);
+                        break;
+                    case "Tuesday":
+                        b.Child = tb;
+                        tuesdayStack.Children.Add(b);
+                        break;
+                    case "Wednesday":
+                        b.Child = tb;
+                        wednesdayStack.Children.Add(b);
+                        break;
+                    case "Thursday":
+                        b.Child = tb;
+                        thursdayStack.Children.Add(b);
+                        break;
+                    case "Friday":
+                        b.Child = tb;
+                        fridayStack.Children.Add(b);
+                        break;
+                    case "Saturday":
+                        b.Child = tb;
+                        saturdayStack.Children.Add(b);
+                        break;
+                    case "Sunday":
+                        b.Child = tb;
+                        sundayStack.Children.Add(b);
+                        break;
+                    default:
+                        Windows.UI.Popups.MessageDialog msg = new Windows.UI.Popups.MessageDialog("Unexpected error!", "Critical Warning");
+                        msg.ShowAsync();
+                        break;
+                }// End of switch
+            }
+            else
             {
-                case "Monday":
-                    b.Child = tb;
-                    mondayStack.Children.Add(b);
-                    break;
-                case "Tuesday":
-                    b.Child = tb;
-                    tuesdayStack.Children.Add(b);
-                    break;
-                case "Wednesday":
-                    b.Child = tb;
-                    wednesdayStack.Children.Add(b);
-                    break;
-                case "Thursday":
-                    b.Child = tb;
-                    thursdayStack.Children.Add(b);
-                    break;
-                case "Friday":
-                    b.Child = tb;
-                    fridayStack.Children.Add(b);
-                    break;
-                case "Saturday":
-                    b.Child = tb;
-                    saturdayStack.Children.Add(b);
-                    break;
-                case "Sunday":
-                    b.Child = tb;
-                    sundayStack.Children.Add(b);
-                    break;
-            }// End of switch
-        }     
+                Windows.UI.Popups.MessageDialog msgWarning = new Windows.UI.Popups.MessageDialog("You must fill in the blanks!", "Error!");
+                msgWarning.ShowAsync();
+                this.Frame.Navigate(typeof(LoginPage));
+            }
+
+
+            //uploadAsync(Name.Text, day, lecture, lecturer, time);
+
+        }
     }
 }
