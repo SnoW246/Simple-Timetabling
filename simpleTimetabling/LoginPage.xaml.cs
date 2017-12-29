@@ -1,35 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace simpleTimetabling
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class LoginPage : Page
     {
         public LoginPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
+            Frame.Navigate(typeof(RegistrationPage));
+        }
 
+        private void Sign_in_Click(object sender, RoutedEventArgs e)
+        {
+            // Take username and password and compare against azure database to validate the user
+
+            Frame.Navigate(typeof(MainPage));
+        }
+
+        private async void Exit_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            var confirmation = new MessageDialog("Are you sure you wish to terminate the application?");
+            confirmation.Title = "Terminate?";
+            confirmation.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
+            confirmation.Commands.Add(new UICommand { Label = "Cancel", Id = 1 });
+            var choice = await confirmation.ShowAsync();
+
+            if ((int)choice.Id == 0)
+            {
+                Application.Current.Exit();
+            }
         }
     }
 }

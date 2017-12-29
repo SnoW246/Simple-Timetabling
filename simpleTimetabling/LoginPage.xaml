@@ -14,7 +14,7 @@
 
         <Grid Name="LoginContentGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -26,41 +26,41 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Grid.ColumnSpan="3" Background="White" CornerRadius="2" Margin="2">
+            <Border Grid.Row="0" Grid.ColumnSpan="3" Background="Transparent" CornerRadius="2" Margin="2">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Welcome" 
-                   TextAlignment="Center" FontStyle="Italic" FontSize="40" Foreground="LightBlue" 
+                   TextAlignment="Center" FontStyle="Italic" FontSize="40" Foreground="Black" 
                    TextWrapping="WrapWholeWords" IsTextScaleFactorEnabled="True"/>
             </Border>
-            <Border Grid.Row="1" Grid.ColumnSpan="3" Background="MediumPurple" CornerRadius="2" Margin="2">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Please Login or Register to create your own timetable" 
-                   TextAlignment="Center" FontStyle="Italic" FontSize="30" Foreground="Black" 
+            <Border Grid.Row="1" Grid.ColumnSpan="3" Background="Transparent" CornerRadius="2" Margin="2">
+                <TextBlock x:Name="infoLoginTxt" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Please Login or Register to create your own timetable" 
+                   TextAlignment="Center" FontStyle="Italic" FontSize="24" Foreground="Maroon" 
                    TextWrapping="WrapWholeWords" IsTextScaleFactorEnabled="True"/>
             </Border>
-            <Border Grid.Row="2" Grid.Column="0" Background="Maroon" CornerRadius="2" Margin="2">
+            <Border Grid.Row="2" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2">
                 <TextBlock Text="Username: " 
-                   TextAlignment="Center" FontStyle="Italic" FontSize="30" Foreground="Black" 
+                   TextAlignment="Right" FontStyle="Italic" FontSize="24" Foreground="Gray" 
                    TextWrapping="WrapWholeWords" IsTextScaleFactorEnabled="True"/>
             </Border>
-            <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Background="Violet" CornerRadius="2" Margin="2">
+            <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Background="Transparent" CornerRadius="2" Margin="2">
                 <TextBox x:Name="usernameTxt" Margin="2"/>
             </Border>
 
-            <Border Grid.Row="3" Grid.Column="0" Background="Moccasin" CornerRadius="2" Margin="2">
+            <Border Grid.Row="3" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2">
                 <TextBlock Text="Password: " 
-                   TextAlignment="Center" FontStyle="Italic" FontSize="30" Foreground="Black" 
-                   Margin="2"/>
+                   TextAlignment="Right" FontStyle="Italic" FontSize="24" Foreground="Gray" 
+                   TextWrapping="WrapWholeWords" IsTextScaleFactorEnabled="True"/>
             </Border>
-            <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Background="Maroon" CornerRadius="2" Margin="2">
+            <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Background="Transparent" CornerRadius="2" Margin="2">
                 <PasswordBox x:Name="passwordBox" Margin="2" />
             </Border>
-            <Border Grid.Row="4" Grid.Column="0" Background="GreenYellow" CornerRadius="2" Margin="2">
-                <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Bold" Content="Register" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="30" UseLayoutRounding="True" Margin="2" FontStyle="Italic" Click="Register_Click"/>
+            <Border Grid.Row="4" Grid.Column="0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" Margin="2">
+                <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Content="Registration" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="24" UseLayoutRounding="True" Margin="2" FontStyle="Italic" Click="Register_Click"/>
             </Border>
-            <Border Grid.Row="4" Grid.Column="1" Background="Yellow" CornerRadius="2" Margin="2">
-                <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Bold" Content="Sign-in" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="30" UseLayoutRounding="True" Margin="2" FontStyle="Italic"/>
+            <Border Grid.Row="4" Grid.Column="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" Margin="2">
+                <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Sign-in" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="24" UseLayoutRounding="True" Margin="2" FontStyle="Italic" Click="Sign_in_Click"/>
             </Border>
-            <Border Grid.Row="4" Grid.Column="2" Background="Orange" CornerRadius="2" Margin="2">
-                <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Bold" Content="Exit" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="30" UseLayoutRounding="True" Margin="2" FontStyle="Italic"/>
+            <Border Grid.Row="4" Grid.Column="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" Margin="2">
+                <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Exit" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="24" UseLayoutRounding="True" Margin="2" FontStyle="Italic" Click="Exit_ClickAsync"/>
             </Border>
         </Grid>
     </Grid>

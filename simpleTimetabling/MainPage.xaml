@@ -46,7 +46,7 @@
             <Button x:Name="FlyoutBtn" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="ExtraBold" Content="+" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="36" UseLayoutRounding="True" Margin="2">
                 <Button.Flyout>
                     <Flyout Placement="Bottom">
-                        <Grid ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Enabled" Background="DarkGray">
+                        <Grid ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Enabled" Background="Transparent">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"/>
