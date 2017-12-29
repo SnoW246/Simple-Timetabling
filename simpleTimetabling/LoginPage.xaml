@@ -57,7 +57,7 @@
                 <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Content="Registration" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="24" UseLayoutRounding="True" Margin="2" FontStyle="Italic" Click="Register_Click"/>
             </Border>
             <Border Grid.Row="4" Grid.Column="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" Margin="2">
-                <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Sign-in" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="24" UseLayoutRounding="True" Margin="2" FontStyle="Italic" Click="Sign_in_Click"/>
+                <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Sign-in" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="24" UseLayoutRounding="True" Margin="2" FontStyle="Italic" Click="Sign_in_ClickAsync"/>
             </Border>
             <Border Grid.Row="4" Grid.Column="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" Margin="2">
                 <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Exit" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="24" UseLayoutRounding="True" Margin="2" FontStyle="Italic" Click="Exit_ClickAsync"/>

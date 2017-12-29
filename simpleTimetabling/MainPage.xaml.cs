@@ -11,6 +11,13 @@ namespace simpleTimetabling
     {
         private MobileServiceCollection<Timetables, Timetables> items;
         private IMobileServiceTable<Timetables> azureTable = App.MobileService.GetTable<Timetables>();
+        //private IMobileServiceTable<Monday> azureMondayTable = App.MobileService.GetTable<Monday>();
+        //private IMobileServiceTable<Tuesday> azureTuesdayTable = App.MobileService.GetTable<Tuesday>();
+        //private IMobileServiceTable<Wednesday> azureWednesdayTable = App.MobileService.GetTable<Wednesday>();
+        //private IMobileServiceTable<Thursday> azureThursdayTable = App.MobileService.GetTable<Thursday>();
+        //private IMobileServiceTable<Friday> azureFridayTable = App.MobileService.GetTable<Friday>();
+        //private IMobileServiceTable<Saturday> azureSaturdayTable = App.MobileService.GetTable<Saturday>();
+        //private IMobileServiceTable<Sunday> azureSundayTable = App.MobileService.GetTable<Sunday>();
 
         public MainPage()
         {

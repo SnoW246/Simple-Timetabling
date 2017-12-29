@@ -1,5 +1,8 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -11,12 +14,13 @@ namespace simpleTimetabling
 {
     public sealed partial class RegistrationPage : Page
     {
-        //private MobileServiceCollection<Users, Users> items;
+        private MobileServiceCollection<Users, Users> userCollection;
         private IMobileServiceTable<Users> azureUsersTable = App.MobileService.GetTable<Users>();
 
         public RegistrationPage()
         {
             InitializeComponent();
+            
         }
 
         public async Task UploadAsync(String name, String surname, String dob, String username, String password)
@@ -32,63 +36,101 @@ namespace simpleTimetabling
             await azureUsersTable.InsertAsync(newUser);
         }
 
-        private void Register_Click(object sender, RoutedEventArgs e)
+        private async void Register_ClickAsync(object sender, RoutedEventArgs e)
         {
-            // Validation of content required
+            //await UsernameValidation();
+            // Declaration of message variables
+            var errorMessage1 = "One or more fields are empty. You must fill out all of the fields below!";
+            var errorMessage2 = "Passwords do not match! Please try again.";
+            var errorMessage3 = "One or more fields are empty. You cannot leave password fields empty!";
+            var errorMessage4 = "Thank you for your registration. Now you can use your credentials to sign -in. Enjoy!";
+            var errorTitle1 = "Invalid Input!";
+            var errorTitle2 = "No Match!";
+            var errorTitle4 = "Thank You!";
+            int errorNo = 0;
+
+            // Validation of content 
+            if (nameTxt.Text.Equals("") || surnameTxt.Text.Equals("") || dobDay.SelectionBoxItem == null ||
+                dobMonth.SelectionBoxItem == null || dobYear.SelectionBoxItem == null || usernameTxt.Text.Equals(""))
+            {
+                errorNo = 1;
+                if (nameTxt.Text.Equals(""))
+                {
+                    nameTxt.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+                }
+                if (surnameTxt.Text.Equals(""))
+                {
+                    surnameTxt.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+                }
+                if (dobDay.SelectionBoxItem == null)
+                {
+                    dobDay.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+                }
+                if (dobMonth.SelectionBoxItem == null)
+                {
+                    dobMonth.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+                }
+                if (dobYear.SelectionBoxItem == null)
+                {
+                    dobYear.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+                }
+                if (usernameTxt.Text.Equals(""))
+                {
+                    usernameTxt.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+                }
+            }// End of if
+
+            //Password match validation
+            if (passwordBox.Password != passwordConfirmBox.Password || passwordBox.Password.Equals("") || passwordConfirmBox.Password.Equals(""))
+            {
+                if (passwordBox.Password != passwordConfirmBox.Password)
+                {
+                    errorNo = 2;
+                    passwordConfirmBox.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+                }
+                if(passwordBox.Password.Equals(""))
+                {
+                    errorNo += 1;
+                    passwordBox.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+                }
+                if (passwordConfirmBox.Password.Equals(""))
+                {
+                    errorNo += 1;
+                    passwordConfirmBox.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+                }
+            }// End of if
+
             // If username already used, check async and tell user with messagege box
             //azureUsersTable.Where(usernameTxt.Text.Equals(azureUsersTable.Username));
             //usernameTxt.Text.
 
-            if (nameTxt.Text.Equals(""))
+
+            switch (errorNo)
             {
-                infoTxt.Text = "One or more fields are empty. You must fill out all of the fields below!";
-                nameTxt.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
-            }
-            if (surnameTxt.Text.Equals(""))
-            {
-                infoTxt.Text = "One or more fields are empty. You must fill out all of the fields below!";
-                surnameTxt.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
-            }
-            if (dobDay.SelectionBoxItem == null)
-            {
-                infoTxt.Text = "One or more fields are empty. You must fill out all of the fields below!";
-                dobDay.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
-            }
-            if (dobMonth.SelectionBoxItem == null)
-            {
-                infoTxt.Text = "One or more fields are empty. You must fill out all of the fields below!";
-                dobMonth.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
-            }
-            if (dobYear.SelectionBoxItem == null)
-            {
-                infoTxt.Text = "One or more fields are empty. You must fill out all of the fields below!";
-                dobYear.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
-            }
-            if (usernameTxt.Text.Equals(""))
-            {
-                infoTxt.Text = "One or more fields are empty. You must fill out all of the fields below!";
-                usernameTxt.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+                case 1:
+                    InformationMessage(errorMessage1, errorTitle1);
+                    break;
+                case 2:
+                    InformationMessage(errorMessage2, errorTitle2);
+                    break;
+                case 3:
+                    InformationMessage(errorMessage3, errorTitle1);
+                    break;
+                default:
+                    break;
             }
 
-            //Password match validation
-            if (passwordBox.Password != passwordConfirmBox.Password || passwordBox.Password.Equals(""))
-            {
-                infoTxt.Text = "Passwords do not match! Please try again.";
-                passwordBox.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
-                passwordConfirmBox.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
-            }
-            else
+            if (errorNo == 0)
             {
                 // Declare DOB variable & collect relative selected box items
                 var dob = dobDay.SelectionBoxItem + "/" + dobMonth.SelectionBoxItem + "/" + dobYear.SelectionBoxItem;
                 // Upload data to Azure Cloud Database table
-                UploadAsync(nameTxt.Text, surnameTxt.Text, dob, usernameTxt.Text, passwordBox.Password);
+                await UploadAsync(nameTxt.Text, surnameTxt.Text, dob, usernameTxt.Text, passwordBox.Password);
 
-                // Make a message box to thank for registration
-                
+                // Message box to thank for registration
+                InformationMessage(errorMessage4, errorTitle4);
                 Frame.Navigate(typeof(LoginPage));
             }
-
         }
 
         private async void Return_ClickAsync(object sender, RoutedEventArgs e)
@@ -103,8 +145,16 @@ namespace simpleTimetabling
             if ((int)choice.Id == 0)
             {
                 Frame.Navigate(typeof(LoginPage));
-            }
-            
+            }  
         }
+
+        private async void InformationMessage(String message, String title)
+        {
+            var confirmation = new MessageDialog(message);
+            confirmation.Title = title;
+            confirmation.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
+            var choice = await confirmation.ShowAsync();
+        }
+
     }
 }
