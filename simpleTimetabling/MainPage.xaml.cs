@@ -27,29 +27,37 @@ namespace simpleTimetabling
 
         public async Task LoadAsync()
         {
-            items = await azureTable.Take(5).ToCollectionAsync();
-            new Windows.UI.Popups.MessageDialog(
-                items.LastOrDefault().ID 
-                + items.LastOrDefault().Lecture 
-                + items.LastOrDefault().Lecturer 
-                + items.LastOrDefault().Name 
-                + items.LastOrDefault().Time).ShowAsync();
+            //items = await azureTable.Take(5).ToCollectionAsync();
+            //await new Windows.UI.Popups.MessageDialog(
+            //    items.LastOrDefault().ID
+            //    + items.LastOrDefault().Lecture
+            //    + items.LastOrDefault().Lecturer
+            //    + items.LastOrDefault().Name
+            //    + items.LastOrDefault().Time).ShowAsync();
+
         }
 
-        public async Task UploadAsync(String name, String day, String lecture, String lecturer, String time)
+        //public async Task UploadAsync(String name, String day, String lecture, String lecturer, String time)
+        public async Task UploadAsync(String userID, String tuesday)
         {
-            var newItem = new Timetables {
-                Name = name,
-                Day = day,
-                Lecture = lecture,
-                Lecturer = lecturer,
-                Time = time
+            var newItem = new Timetables
+            {
+                UserID = userID,
+                Tuesday = tuesday
             };
+            await azureTable.InsertAsync(newItem);
+            //var newItem = new Timetables {
+            //    Name = name,
+            //    Day = day,
+            //    Lecture = lecture,
+            //    Lecturer = lecturer,
+            //    Time = time
+            //};
 
-            azureTable.InsertAsync(newItem);
+            //await azureTable.InsertAsync(newItem);
         }
 
-        private void AddNewBtn_Click(object sender, RoutedEventArgs e)
+        private async void AddNewBtn_ClickAsync(object sender, RoutedEventArgs e)
         {
             if (Day.SelectionBoxItem != null)
             {
@@ -64,10 +72,11 @@ namespace simpleTimetabling
 
                 TextBlock tb = new TextBlock
                 {
-                    HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
-                    VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center,
-                    TextWrapping = Windows.UI.Xaml.TextWrapping.Wrap,
-                    Width = 150
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    TextWrapping = TextWrapping.Wrap,
+                    Width = 150,
+                    IsHoldingEnabled = true
                 };
                 // Set margin of the textblock
                 Thickness tbMargin = tb.Margin;
@@ -77,11 +86,19 @@ namespace simpleTimetabling
                 tb.Margin = tbMargin;
                 tb.Padding = padding;
 
-                tb.Text = Abbreviation.Text.ToString().ToUpper() + " (" + Name.Text + ")" + "\r\n" +
+                
+                    
+                var element = Abbreviation.Text.ToString().ToUpper() + " (" + Name.Text + ")" + "\r\n" +
                     Type.SelectionBoxItem.ToString() + "\r\n" + Place.Text + "\r\n" +
                     StartTimeHour.SelectionBoxItem.ToString() + ":" + StartTimeMin.SelectionBoxItem.ToString() + " - " +
                     EndTimeHour.SelectionBoxItem.ToString() + ":" + EndTimeMin.SelectionBoxItem.ToString() + "\r\n" +
                     Lecturer.Text;
+
+                tb.Text = element;
+
+                // Add to Azure DB async!
+                await UploadAsync("SnoW246", element);
+
 
                 //tb.Text = "Name: " + Name.Text + "\r\n";
                 //tb.Text += "Abbreviation: " + Abbreviation.Text.ToString().ToUpper() + "\r\n";
@@ -133,7 +150,6 @@ namespace simpleTimetabling
             {
                 Windows.UI.Popups.MessageDialog msgWarning = new Windows.UI.Popups.MessageDialog("You must fill in the blanks!", "Error!");
                 msgWarning.ShowAsync();
-                Frame.Navigate(typeof(LoginPage));
             }
 
             //UploadAsync(Name.Text, day, lecture, lecturer, time);

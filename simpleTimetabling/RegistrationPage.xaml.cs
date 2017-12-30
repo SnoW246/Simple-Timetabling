@@ -99,11 +99,6 @@ namespace simpleTimetabling
                 }
             }// End of if
 
-            // If username already used, check async and tell user with messagege box
-            //azureUsersTable.Where(usernameTxt.Text.Equals(azureUsersTable.Username));
-            //usernameTxt.Text.
-            
-
             switch (errorNo)
             {
                 case 1:

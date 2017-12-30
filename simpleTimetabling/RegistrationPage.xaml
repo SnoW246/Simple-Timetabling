@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Name="RegistrationGrid" Margin="2" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Enabled">
+    <Grid Name="RegistrationGrid" Margin="2" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Enabled" >
         <Grid.Background>
             <ImageBrush ImageSource="Assets/NotepadBckground.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
@@ -15,7 +15,7 @@
         <Grid Name="RegistrationContentGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>

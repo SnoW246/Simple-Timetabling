@@ -13,6 +13,7 @@ namespace simpleTimetabling
     {
         private MobileServiceCollection<Users, Users> userCollection;
         private IMobileServiceTable<Users> azureUsersTable = App.MobileService.GetTable<Users>();
+        private string UniqueID { get; set; }
 
         public LoginPage()
         {
@@ -41,8 +42,8 @@ namespace simpleTimetabling
                 var choice = await confirmation.ShowAsync();
             }
             else{
-                var uniqueID = check.ID;
-                var confirmation = new MessageDialog("Match!" + ", " + uniqueID.ToString() + ", " + check.Username.ToString() + ", ");
+                UniqueID = check.ID;
+                var confirmation = new MessageDialog("Match!" + ", " + UniqueID + ", " + check.Username.ToString() + ", ");
                 confirmation.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
                 var choice = await confirmation.ShowAsync();
 

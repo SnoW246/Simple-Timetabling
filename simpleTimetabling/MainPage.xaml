@@ -8,6 +8,10 @@
 
     <!--Declaration of main grid to hold all content of the application-->
     <Grid Name="MainGrid" Margin="2" >
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/OldBooksBckground.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        
         <!--Definition of column properties-->
         <Grid.ColumnDefinitions>
             <!--Column #1-->
@@ -29,7 +33,7 @@
         </Grid.RowDefinitions>
 
         <!--Definition of border for Row #1 (Top Row)-->
-        <Border Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="1" Background="White" CornerRadius="2" Margin="2"/>
+        <Border Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="1" Background="Transparent" CornerRadius="2" Margin="2"/>
         <!--Definition of header in Row #1-->
         <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" Text="Simple Timetabling" 
                    TextAlignment="Center" FontStyle="Italic" FontSize="40" Foreground="LightBlue" 
@@ -40,7 +44,7 @@
         <!--Definition of border for Column #3 (Furthermost Right Side Column)-->
         <Border Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="Gray" CornerRadius="2" Margin="2"/>
         <!--Definition of border for Row #3 (Bottom Row)-->
-        <Border Grid.Column="1" Grid.Row="2" Background="Yellow" CornerRadius="2" Margin="2"/>
+        <Border Grid.Column="1" Grid.Row="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" Margin="2"/>
 
         <StackPanel Grid.Column="1" Grid.Row="2">
             <Button x:Name="FlyoutBtn" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="ExtraBold" Content="+" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="36" UseLayoutRounding="True" Margin="2">
@@ -194,7 +198,7 @@
                                 <ComboBoxItem Content="Lecture"/>
                                 <ComboBoxItem Content="Practical"/>
                             </ComboBox>
-                            <Button x:Name="AddNewBtn" Grid.Row="1" Grid.Column="2" Grid.RowSpan="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="ExtraBold" Content="+" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="36" UseLayoutRounding="True" Margin="2" Click="AddNewBtn_Click"/>
+                            <Button x:Name="AddNewBtn" Grid.Row="1" Grid.Column="2" Grid.RowSpan="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="ExtraBold" Content="+" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="36" UseLayoutRounding="True" Margin="2" Click="AddNewBtn_ClickAsync"/>
                         </Grid>
                     </Flyout>
                 </Button.Flyout>
