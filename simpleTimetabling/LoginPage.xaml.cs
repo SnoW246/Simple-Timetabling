@@ -30,13 +30,10 @@ namespace simpleTimetabling
             var uName = usernameTxt.Text.ToString();
             var uPass = passwordBox.Password;
 
-
             userCollection = await azureUsersTable.ToCollectionAsync();
-            var checkU = userCollection.FirstOrDefault(u => u.Username.Equals(uName) && u.Password.Equals(uPass));
-            //var checkU = userCollection.FirstOrDefault(u => u.Username.Equals(uName));
-            //var checkP = userCollection.FirstOrDefault(u => u.Password.Equals(uPass));
+            var check = userCollection.FirstOrDefault(u => u.Username.Equals(uName) && u.Password.Equals(uPass));
 
-            if (checkU == null)
+            if (check == null)
             {
                 var confirmation = new MessageDialog("Wrong username or password! Please try again.");
                 confirmation.Title = "Wrong Input!";
@@ -44,25 +41,13 @@ namespace simpleTimetabling
                 var choice = await confirmation.ShowAsync();
             }
             else{
-                var uniqueID = checkU.ID;
-                var confirmation = new MessageDialog("Match!" + ", " + uniqueID.ToString() + ", " + checkU.Username.ToString() + ", ");
+                var uniqueID = check.ID;
+                var confirmation = new MessageDialog("Match!" + ", " + uniqueID.ToString() + ", " + check.Username.ToString() + ", ");
                 confirmation.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
                 var choice = await confirmation.ShowAsync();
 
                 Frame.Navigate(typeof(MainPage));
             }
-
-
-
-            // if (checkU.Username.Equals(uName) && checkP.Password.Equals(uPass))
-            //if (checkU.Equals())
-            //{
-            //    var confirmation = new MessageDialog("Match!" + checkU.ID.ToString() + ", " + checkU.Username.ToString() + ", " + checkP.Password.ToString());
-            //    confirmation.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
-            //    var choice = await confirmation.ShowAsync();
-            //}
-
-
         }
 
         private async void Exit_ClickAsync(object sender, RoutedEventArgs e)

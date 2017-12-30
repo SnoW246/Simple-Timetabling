@@ -17,10 +17,18 @@ namespace simpleTimetabling
         private MobileServiceCollection<Users, Users> userCollection;
         private IMobileServiceTable<Users> azureUsersTable = App.MobileService.GetTable<Users>();
 
+        // Declaration of message variables
+        private string errorMessage1 = "One or more fields are empty. You must fill out all of the fields below!";
+        private string errorMessage2 = "Passwords do not match! Please try again.";
+        private string errorMessage3 = "One or more fields are empty. You cannot leave password fields empty!";
+        private string errorMessage4 = "Thank you for your registration. Now you can use your credentials to sign -in. Enjoy!";
+        private string errorTitle1 = "Invalid Input!";
+        private string errorTitle2 = "No Match!";
+        private string errorTitle4 = "Thank You!";
+
         public RegistrationPage()
         {
             InitializeComponent();
-            
         }
 
         public async Task UploadAsync(String name, String surname, String dob, String username, String password)
@@ -38,15 +46,6 @@ namespace simpleTimetabling
 
         private async void Register_ClickAsync(object sender, RoutedEventArgs e)
         {
-            //await UsernameValidation();
-            // Declaration of message variables
-            var errorMessage1 = "One or more fields are empty. You must fill out all of the fields below!";
-            var errorMessage2 = "Passwords do not match! Please try again.";
-            var errorMessage3 = "One or more fields are empty. You cannot leave password fields empty!";
-            var errorMessage4 = "Thank you for your registration. Now you can use your credentials to sign -in. Enjoy!";
-            var errorTitle1 = "Invalid Input!";
-            var errorTitle2 = "No Match!";
-            var errorTitle4 = "Thank You!";
             int errorNo = 0;
 
             // Validation of content 
@@ -103,7 +102,7 @@ namespace simpleTimetabling
             // If username already used, check async and tell user with messagege box
             //azureUsersTable.Where(usernameTxt.Text.Equals(azureUsersTable.Username));
             //usernameTxt.Text.
-
+            
 
             switch (errorNo)
             {
@@ -122,14 +121,7 @@ namespace simpleTimetabling
 
             if (errorNo == 0)
             {
-                // Declare DOB variable & collect relative selected box items
-                var dob = dobDay.SelectionBoxItem + "/" + dobMonth.SelectionBoxItem + "/" + dobYear.SelectionBoxItem;
-                // Upload data to Azure Cloud Database table
-                await UploadAsync(nameTxt.Text, surnameTxt.Text, dob, usernameTxt.Text, passwordBox.Password);
-
-                // Message box to thank for registration
-                InformationMessage(errorMessage4, errorTitle4);
-                Frame.Navigate(typeof(LoginPage));
+                await UsernameValidation();
             }
         }
 
@@ -156,5 +148,49 @@ namespace simpleTimetabling
             var choice = await confirmation.ShowAsync();
         }
 
+        private async Task UsernameValidation()
+        {
+            var uName = usernameTxt.Text;
+            userCollection = await azureUsersTable.ToCollectionAsync();
+            var check = userCollection.FirstOrDefault(u => u.Username.Equals(uName));
+            if (check == null)
+            {
+                check = userCollection.FirstOrDefault();
+            }
+            try
+            {
+                if (check.Username.ToString().Equals(uName))
+                {
+                    var confirmation = new MessageDialog("Username '" + uName + "' is already in use! Please choose another username.");
+                    confirmation.Title = "Wrong Input!";
+                    confirmation.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
+                    var choice = await confirmation.ShowAsync();
+                    usernameTxt.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+                }
+                else
+                {
+                    var confirmation = new MessageDialog("Continue");
+                    confirmation.Title = "Continue";
+                    confirmation.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
+                    var choice = await confirmation.ShowAsync();
+
+                    // Declare DOB variable & collect relative selected box items
+                    var dob = dobDay.SelectionBoxItem + "/" + dobMonth.SelectionBoxItem + "/" + dobYear.SelectionBoxItem;
+                    // Upload data to Azure Cloud Database table
+                    await UploadAsync(nameTxt.Text, surnameTxt.Text, dob, usernameTxt.Text, passwordBox.Password);
+
+                    // Message box to thank for registration
+                    InformationMessage(errorMessage4, errorTitle4);
+                    Frame.Navigate(typeof(LoginPage));
+                }
+            }
+            catch(Exception e)
+            {
+                var confirmation = new MessageDialog("Unexpected Error!'" + check.Username.ToString());
+                confirmation.Title = "Error!";
+                confirmation.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
+                var choice = await confirmation.ShowAsync();
+            }
+        }
     }
 }
