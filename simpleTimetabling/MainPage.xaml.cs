@@ -1,4 +1,5 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
+using simpleTimetabling.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,11 +29,20 @@ namespace simpleTimetabling
 
         public async Task LoadAsync()
         {
-            
+            int count = 0;
+            do
+            {
+                items = await azureTable.Take(1).ToCollectionAsync();
 
-            items = await azureTable.Take(5).ToCollectionAsync();
+                    for(int i = 0; i < items.Count; i++){
+                        items = await azureTable.Take((items.Count+1)).ToCollectionAsync();
+                        count++;
+                    }
+            } while (items.Count != count);
+
+           // items = await azureTable.Take(200).Where(x => x.UserID.Equals(UniqueUser.UniqueID)).ToCollectionAsync();
             List<string> elementsMonday = new List<string>();
-            elementsMonday = items.Where(x => x.Monday != null).Select(x => x.Monday).ToList();
+            elementsMonday = items.Where(x => x.Monday != null && x.UserID.Equals(UniqueUser.UniqueID)).Select(x => x.Monday).ToList();
             int size = elementsMonday.Count();
             for (int i = 0; i < size; i++)
             {
@@ -58,12 +68,13 @@ namespace simpleTimetabling
         }
 
         //public async Task UploadAsync(String name, String day, String lecture, String lecturer, String time)
-        public async Task UploadAsync(String userID, String tuesday)
+        public async Task UploadAsync(String userID, String monday /*String tuesday*/)
         {
             var newItem = new Timetables
             {
                 UserID = userID,
-                Tuesday = tuesday
+                Monday = monday
+                //Tuesday = tuesday
             };
             await azureTable.InsertAsync(newItem);
             //var newItem = new Timetables {
@@ -100,7 +111,7 @@ namespace simpleTimetabling
                 var tb = GenerateNewTextBox(element);
 
                 // Add to Azure DB async!
-                await UploadAsync("SnoW246", element);
+                await UploadAsync(UniqueUser.UniqueID, element);
 
 
                 //tb.Text = "Name: " + Name.Text + "\r\n";
