@@ -1,5 +1,6 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -27,7 +28,26 @@ namespace simpleTimetabling
 
         public async Task LoadAsync()
         {
-            //items = await azureTable.Take(5).ToCollectionAsync();
+            
+
+            items = await azureTable.Take(5).ToCollectionAsync();
+            List<string> elementsMonday = new List<string>();
+            elementsMonday = items.Where(x => x.Monday != null).Select(x => x.Monday).ToList();
+            int size = elementsMonday.Count();
+            for (int i = 0; i < size; i++)
+            {
+                var tb = new TextBlock();
+                var b = new Border();
+                tb = GenerateNewTextBox(elementsMonday.ElementAt(i));
+                b = GenerateNewBorder(tb);
+                //b.Child = tb;
+                mondayStack.Children.Add(b);
+                //var tb = new TextBlock();
+                //tb = GenerateNewTextBox(items.LastOrDefault().Monday);
+                //b.Child = tb;
+                //mondayStack.Children.Add(b);
+            }
+
             //await new Windows.UI.Popups.MessageDialog(
             //    items.LastOrDefault().ID
             //    + items.LastOrDefault().Lecture
@@ -70,31 +90,14 @@ namespace simpleTimetabling
                 bMargin.Top = 2;
                 b.Margin = bMargin;
 
-                TextBlock tb = new TextBlock
-                {
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    TextWrapping = TextWrapping.Wrap,
-                    Width = 150,
-                    IsHoldingEnabled = true
-                };
-                // Set margin of the textblock
-                Thickness tbMargin = tb.Margin;
-                Thickness padding = tb.Padding;
-                tbMargin.Left = 2;
-                padding.Top = 10;
-                tb.Margin = tbMargin;
-                tb.Padding = padding;
-
-                
-                    
                 var element = Abbreviation.Text.ToString().ToUpper() + " (" + Name.Text + ")" + "\r\n" +
                     Type.SelectionBoxItem.ToString() + "\r\n" + Place.Text + "\r\n" +
                     StartTimeHour.SelectionBoxItem.ToString() + ":" + StartTimeMin.SelectionBoxItem.ToString() + " - " +
                     EndTimeHour.SelectionBoxItem.ToString() + ":" + EndTimeMin.SelectionBoxItem.ToString() + "\r\n" +
                     Lecturer.Text;
 
-                tb.Text = element;
+                //tb.Text = element;
+                var tb = GenerateNewTextBox(element);
 
                 // Add to Azure DB async!
                 await UploadAsync("SnoW246", element);
@@ -154,5 +157,44 @@ namespace simpleTimetabling
 
             //UploadAsync(Name.Text, day, lecture, lecturer, time);
         }
+
+        public TextBlock GenerateNewTextBox(String element)
+        {
+            TextBlock tb = new TextBlock
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                TextWrapping = TextWrapping.Wrap,
+                Width = 150,
+                IsHoldingEnabled = true
+            };
+            // Set margin of the textblock
+            Thickness tbMargin = tb.Margin;
+            Thickness padding = tb.Padding;
+            tbMargin.Left = 2;
+            padding.Top = 10;
+            tb.Margin = tbMargin;
+            tb.Padding = padding;
+            tb.Text = element;
+
+            return tb;
+        }
+
+        public Border GenerateNewBorder(TextBlock tb)
+        {
+            Border b = new Border();
+            b.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.DarkGray);
+            b.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.White);
+            b.CornerRadius = new CornerRadius(2);
+            b.BorderThickness = new Thickness(2);
+            Thickness bMargin = b.Margin;
+            bMargin.Top = 2;
+            b.Margin = bMargin;
+
+            b.Child = tb;
+            return b;
+        }
+        
+
     }
 }

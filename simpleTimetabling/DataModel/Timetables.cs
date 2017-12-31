@@ -11,6 +11,16 @@ namespace simpleTimetabling
         public string Monday { get; set; }
         [JsonProperty(PropertyName = "Tuesday")]
         public string Tuesday { get; set; }
+        [JsonProperty(PropertyName = "Wednesday")]
+        public string Wednesday { get; set; }
+        [JsonProperty(PropertyName = "Thursday")]
+        public string Thursday { get; set; }
+        [JsonProperty(PropertyName = "Friday")]
+        public string Friday { get; set; }
+        [JsonProperty(PropertyName = "Saturday")]
+        public string Saturday { get; set; }
+        [JsonProperty(PropertyName = "Sunday")]
+        public string Sunday { get; set; }
 
         //[JsonProperty(PropertyName = "Name")]
         //public string Name { get; set; }
