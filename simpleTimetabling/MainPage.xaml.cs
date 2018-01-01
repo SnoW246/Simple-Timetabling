@@ -13,13 +13,6 @@ namespace simpleTimetabling
     {
         private MobileServiceCollection<Timetables, Timetables> items;
         private IMobileServiceTable<Timetables> azureTable = App.MobileService.GetTable<Timetables>();
-        //private IMobileServiceTable<Monday> azureMondayTable = App.MobileService.GetTable<Monday>();
-        //private IMobileServiceTable<Tuesday> azureTuesdayTable = App.MobileService.GetTable<Tuesday>();
-        //private IMobileServiceTable<Wednesday> azureWednesdayTable = App.MobileService.GetTable<Wednesday>();
-        //private IMobileServiceTable<Thursday> azureThursdayTable = App.MobileService.GetTable<Thursday>();
-        //private IMobileServiceTable<Friday> azureFridayTable = App.MobileService.GetTable<Friday>();
-        //private IMobileServiceTable<Saturday> azureSaturdayTable = App.MobileService.GetTable<Saturday>();
-        //private IMobileServiceTable<Sunday> azureSundayTable = App.MobileService.GetTable<Sunday>();
 
         public MainPage()
         {
@@ -33,18 +26,19 @@ namespace simpleTimetabling
             do
             {
                 items = await azureTable.Take(1).ToCollectionAsync();
-
                     for(int i = 0; i < items.Count; i++){
                         items = await azureTable.Take((items.Count+1)).ToCollectionAsync();
                         count++;
                     }
             } while (items.Count != count);
 
+            var itemsCP = items;
+
            // items = await azureTable.Take(200).Where(x => x.UserID.Equals(UniqueUser.UniqueID)).ToCollectionAsync();
             List<string> elementsMonday = new List<string>();
             elementsMonday = items.Where(x => x.Monday != null && x.UserID.Equals(UniqueUser.UniqueID)).Select(x => x.Monday).ToList();
-            int size = elementsMonday.Count();
-            for (int i = 0; i < size; i++)
+            int sizeMonday = elementsMonday.Count();
+            for (int i = 0; i < sizeMonday; i++)
             {
                 var tb = new TextBlock();
                 var b = new Border();
@@ -57,35 +51,144 @@ namespace simpleTimetabling
                 //b.Child = tb;
                 //mondayStack.Children.Add(b);
             }
+            items = itemsCP;
 
-            //await new Windows.UI.Popups.MessageDialog(
-            //    items.LastOrDefault().ID
-            //    + items.LastOrDefault().Lecture
-            //    + items.LastOrDefault().Lecturer
-            //    + items.LastOrDefault().Name
-            //    + items.LastOrDefault().Time).ShowAsync();
+            List<string> elementsTuesday = new List<string>();
+            elementsTuesday = items.Where(x => x.Tuesday != null && x.UserID.Equals(UniqueUser.UniqueID)).Select(x => x.Tuesday).ToList();
+            int sizeTuesday = elementsTuesday.Count();
+            for (int i = 0; i < sizeTuesday; i++)
+            {
+                var tb = new TextBlock();
+                var b = new Border();
+                tb = GenerateNewTextBox(elementsTuesday.ElementAt(i));
+                b = GenerateNewBorder(tb);
+                tuesdayStack.Children.Add(b);
+            }
+            items = itemsCP;
 
+            List<string> elementsWednesday = new List<string>();
+            elementsWednesday = items.Where(x => x.Wednesday != null && x.UserID.Equals(UniqueUser.UniqueID)).Select(x => x.Wednesday).ToList();
+            int sizeWednesday = elementsWednesday.Count();
+            for (int i = 0; i < sizeWednesday; i++)
+            {
+                var tb = new TextBlock();
+                var b = new Border();
+                tb = GenerateNewTextBox(elementsWednesday.ElementAt(i));
+                b = GenerateNewBorder(tb);
+                wednesdayStack.Children.Add(b);
+            }
+            items = itemsCP;
+
+            List<string> elementsThursday = new List<string>();
+            elementsThursday = items.Where(x => x.Thursday != null && x.UserID.Equals(UniqueUser.UniqueID)).Select(x => x.Thursday).ToList();
+            int sizeThursday = elementsThursday.Count();
+            for (int i = 0; i < sizeThursday; i++)
+            {
+                var tb = new TextBlock();
+                var b = new Border();
+                tb = GenerateNewTextBox(elementsThursday.ElementAt(i));
+                b = GenerateNewBorder(tb);
+                thursdayStack.Children.Add(b);
+            }
+            items = itemsCP;
+
+            List<string> elementsFriday = new List<string>();
+            elementsFriday = items.Where(x => x.Friday != null && x.UserID.Equals(UniqueUser.UniqueID)).Select(x => x.Friday).ToList();
+            int sizeFriday = elementsFriday.Count();
+            for (int i = 0; i < sizeFriday; i++)
+            {
+                var tb = new TextBlock();
+                var b = new Border();
+                tb = GenerateNewTextBox(elementsFriday.ElementAt(i));
+                b = GenerateNewBorder(tb);
+                fridayStack.Children.Add(b);
+            }
+            items = itemsCP;
+
+            List<string> elementsSaturday = new List<string>();
+            elementsSaturday = items.Where(x => x.Saturday != null && x.UserID.Equals(UniqueUser.UniqueID)).Select(x => x.Saturday).ToList();
+            int sizeSaturday = elementsSaturday.Count();
+            for (int i = 0; i < sizeSaturday; i++)
+            {
+                var tb = new TextBlock();
+                var b = new Border();
+                tb = GenerateNewTextBox(elementsSaturday.ElementAt(i));
+                b = GenerateNewBorder(tb);
+                saturdayStack.Children.Add(b);
+            }
+            items = itemsCP;
+
+            List<string> elementsSunday = new List<string>();
+            elementsSunday = items.Where(x => x.Sunday != null && x.UserID.Equals(UniqueUser.UniqueID)).Select(x => x.Sunday).ToList();
+            int sizeSunday = elementsSunday.Count();
+            for (int i = 0; i < sizeSunday; i++)
+            {
+                var tb = new TextBlock();
+                var b = new Border();
+                tb = GenerateNewTextBox(elementsSunday.ElementAt(i));
+                b = GenerateNewBorder(tb);
+                sundayStack.Children.Add(b);
+            }
+            items = itemsCP;
         }
 
         //public async Task UploadAsync(String name, String day, String lecture, String lecturer, String time)
-        public async Task UploadAsync(String userID, String monday /*String tuesday*/)
+        public async Task UploadAsync(String userID, String element, String day)
         {
-            var newItem = new Timetables
+            var newItem = new Timetables();
+            switch (day)
             {
-                UserID = userID,
-                Monday = monday
-                //Tuesday = tuesday
-            };
+                case "Monday":
+                    newItem = new Timetables
+                    {
+                        UserID = userID,
+                        Monday = element
+                    };
+                    break;
+                case "Tuesday":
+                    newItem = new Timetables
+                    {
+                        UserID = userID,
+                        Tuesday = element
+                    };
+                    break;
+                case "Wednesday":
+                    newItem = new Timetables
+                    {
+                        UserID = userID,
+                        Wednesday = element
+                    };
+                    break;
+                case "Thursday":
+                    newItem = new Timetables
+                    {
+                        UserID = userID,
+                        Thursday = element
+                    };
+                    break;
+                case "Friday":
+                    newItem = new Timetables
+                    {
+                        UserID = userID,
+                        Friday = element
+                    };
+                    break;
+                case "Saturday":
+                    newItem = new Timetables
+                    {
+                        UserID = userID,
+                        Saturday = element
+                    };
+                    break;
+                case "Sunday":
+                    newItem = new Timetables
+                    {
+                        UserID = userID,
+                        Sunday = element
+                    };
+                    break;
+            }
             await azureTable.InsertAsync(newItem);
-            //var newItem = new Timetables {
-            //    Name = name,
-            //    Day = day,
-            //    Lecture = lecture,
-            //    Lecturer = lecturer,
-            //    Time = time
-            //};
-
-            //await azureTable.InsertAsync(newItem);
         }
 
         private async void AddNewBtn_ClickAsync(object sender, RoutedEventArgs e)
@@ -107,21 +210,7 @@ namespace simpleTimetabling
                     EndTimeHour.SelectionBoxItem.ToString() + ":" + EndTimeMin.SelectionBoxItem.ToString() + "\r\n" +
                     Lecturer.Text;
 
-                //tb.Text = element;
                 var tb = GenerateNewTextBox(element);
-
-                // Add to Azure DB async!
-                await UploadAsync(UniqueUser.UniqueID, element);
-
-
-                //tb.Text = "Name: " + Name.Text + "\r\n";
-                //tb.Text += "Abbreviation: " + Abbreviation.Text.ToString().ToUpper() + "\r\n";
-                //tb.Text += "Day: " + Day.SelectionBoxItem.ToString() + "\r\n";
-                //tb.Text += "Place: " + Place.Text + "\r\n";
-                //tb.Text += "Start Time: " + StartTimeHour.SelectionBoxItem.ToString() + ":" + StartTimeMin.SelectionBoxItem.ToString() + "\r\n";
-                //tb.Text += "End Time: " + EndTimeHour.SelectionBoxItem.ToString() + ":" + EndTimeMin.SelectionBoxItem.ToString() + "\r\n";
-                //tb.Text += "Lecturer: " + Lecturer.Text + "\r\n";
-                //tb.Text += "Type: " + Type.SelectionBoxItem.ToString();
 
                 string caseSwitch = Day.SelectionBoxItem.ToString();
                 switch (caseSwitch)
@@ -129,44 +218,52 @@ namespace simpleTimetabling
                     case "Monday":
                         b.Child = tb;
                         mondayStack.Children.Add(b);
+                        // Add to Azure DB async!
+                        await UploadAsync(UniqueUser.UniqueID, element, caseSwitch);
                         break;
                     case "Tuesday":
                         b.Child = tb;
                         tuesdayStack.Children.Add(b);
+                        // Add to Azure DB async!
+                        await UploadAsync(UniqueUser.UniqueID, element, caseSwitch);
                         break;
                     case "Wednesday":
                         b.Child = tb;
                         wednesdayStack.Children.Add(b);
+                        // Add to Azure DB async!
+                        await UploadAsync(UniqueUser.UniqueID, element, caseSwitch);
                         break;
                     case "Thursday":
                         b.Child = tb;
                         thursdayStack.Children.Add(b);
+                        // Add to Azure DB async!
+                        await UploadAsync(UniqueUser.UniqueID, element, caseSwitch);
                         break;
                     case "Friday":
                         b.Child = tb;
                         fridayStack.Children.Add(b);
+                        // Add to Azure DB async!
+                        await UploadAsync(UniqueUser.UniqueID, element, caseSwitch);
                         break;
                     case "Saturday":
                         b.Child = tb;
                         saturdayStack.Children.Add(b);
+                        // Add to Azure DB async!
+                        await UploadAsync(UniqueUser.UniqueID, element, caseSwitch);
                         break;
                     case "Sunday":
                         b.Child = tb;
                         sundayStack.Children.Add(b);
-                        break;
-                    default:
-                        Windows.UI.Popups.MessageDialog msg = new Windows.UI.Popups.MessageDialog("Unexpected error!", "Critical Warning");
-                        msg.ShowAsync();
+                        // Add to Azure DB async!
+                        await UploadAsync(UniqueUser.UniqueID, element, caseSwitch);
                         break;
                 }// End of switch
             }
             else
             {
                 Windows.UI.Popups.MessageDialog msgWarning = new Windows.UI.Popups.MessageDialog("You must fill in the blanks!", "Error!");
-                msgWarning.ShowAsync();
+                await msgWarning.ShowAsync();
             }
-
-            //UploadAsync(Name.Text, day, lecture, lecturer, time);
         }
 
         public TextBlock GenerateNewTextBox(String element)
@@ -205,7 +302,5 @@ namespace simpleTimetabling
             b.Child = tb;
             return b;
         }
-        
-
     }
 }
