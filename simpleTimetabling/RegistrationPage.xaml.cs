@@ -21,7 +21,7 @@ namespace simpleTimetabling
         private string errorMessage1 = "One or more fields are empty. You must fill out all of the fields below!";
         private string errorMessage2 = "Passwords do not match! Please try again.";
         private string errorMessage3 = "One or more fields are empty. You cannot leave password fields empty!";
-        private string errorMessage4 = "Thank you for your registration. Now you can use your credentials to sign -in. Enjoy!";
+        private string errorMessage4 = "Thank you for your registration. Now you can use your credentials to sign-in. Enjoy!";
         private string errorTitle1 = "Invalid Input!";
         private string errorTitle2 = "No Match!";
         private string errorTitle4 = "Thank You!";

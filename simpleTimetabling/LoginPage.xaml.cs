@@ -6,15 +6,12 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace simpleTimetabling
 {
     public sealed partial class LoginPage : Page
     {
         private MobileServiceCollection<Users, Users> userCollection;
         private IMobileServiceTable<Users> azureUsersTable = App.MobileService.GetTable<Users>();
-        //private string UniqueID { get; set; }
 
         public LoginPage()
         {
@@ -44,9 +41,9 @@ namespace simpleTimetabling
             }
             else{
                 UniqueUser.UniqueID = check.ID.ToString();
-                var confirmation = new MessageDialog("Match!" + ", " + UniqueUser.UniqueID + ", " + check.Username.ToString() + ", ");
-                confirmation.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
-                var choice = await confirmation.ShowAsync();
+                //var confirmation = new MessageDialog("Match!" + ", " + UniqueUser.UniqueID + ", " + check.Username.ToString() + ", ");
+                //confirmation.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
+                //var choice = await confirmation.ShowAsync();
 
                 Frame.Navigate(typeof(MainPage));
             }

@@ -13,6 +13,7 @@ namespace simpleTimetabling
     {
         private MobileServiceCollection<Timetables, Timetables> items;
         private IMobileServiceTable<Timetables> azureTable = App.MobileService.GetTable<Timetables>();
+        //public interface IDomainManager<TData> where TData : class, ITableData
 
         public MainPage()
         {
@@ -34,7 +35,6 @@ namespace simpleTimetabling
 
             var itemsCP = items;
 
-           // items = await azureTable.Take(200).Where(x => x.UserID.Equals(UniqueUser.UniqueID)).ToCollectionAsync();
             List<string> elementsMonday = new List<string>();
             elementsMonday = items.Where(x => x.Monday != null && x.UserID.Equals(UniqueUser.UniqueID)).Select(x => x.Monday).ToList();
             int sizeMonday = elementsMonday.Count();
@@ -44,12 +44,8 @@ namespace simpleTimetabling
                 var b = new Border();
                 tb = GenerateNewTextBox(elementsMonday.ElementAt(i));
                 b = GenerateNewBorder(tb);
-                //b.Child = tb;
+
                 mondayStack.Children.Add(b);
-                //var tb = new TextBlock();
-                //tb = GenerateNewTextBox(items.LastOrDefault().Monday);
-                //b.Child = tb;
-                //mondayStack.Children.Add(b);
             }
             items = itemsCP;
 
@@ -132,7 +128,6 @@ namespace simpleTimetabling
             items = itemsCP;
         }
 
-        //public async Task UploadAsync(String name, String day, String lecture, String lecturer, String time)
         public async Task UploadAsync(String userID, String element, String day)
         {
             var newItem = new Timetables();
@@ -266,6 +261,79 @@ namespace simpleTimetabling
             }
         }
 
+        //protected virtual async Task DeleteAsync(string ID);
+
+        private async void DeleteThisBtn_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            var element = DeleteThisAbbreviation.Text.ToString().ToUpper() + " (" + DeleteThisName.Text + ")" + "\r\n" +
+                    DeleteThisType.SelectionBoxItem.ToString() + "\r\n" + DeleteThisPlace.Text + "\r\n" +
+                    DeleteThisStartTimeHour.SelectionBoxItem.ToString() + ":" + DeleteThisStartTimeMin.SelectionBoxItem.ToString() + " - " +
+                    DeleteThisEndTimeHour.SelectionBoxItem.ToString() + ":" + DeleteThisEndTimeMin.SelectionBoxItem.ToString() + "\r\n" +
+                    DeleteThisLecturer.Text;
+
+            string caseSwitch = DeleteThisDay.SelectionBoxItem.ToString();
+            switch (caseSwitch)
+            {
+                case "Monday":
+                    var elementsMonday = await azureTable.ToListAsync();
+                    var removeMondayElement = elementsMonday.Where(x => x.Monday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Monday.Equals(element.ToString()));
+                    foreach (var item in removeMondayElement)
+                    {
+                        await azureTable.DeleteAsync(item);
+                    }
+                    break;
+                case "Tuesday":
+                    var elementsTuesday = await azureTable.ToListAsync();
+                    var removeTuesdayElement = elementsTuesday.Where(x => x.Tuesday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Tuesday.Equals(element.ToString()));
+                    foreach (var item in removeTuesdayElement)
+                    {
+                        await azureTable.DeleteAsync(item);
+                    }
+                    break;
+                case "Wednesday":
+                    var elementsWednesday = await azureTable.ToListAsync();
+                    var removeWednesdayElement = elementsWednesday.Where(x => x.Wednesday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Wednesday.Equals(element.ToString()));
+                    foreach (var item in removeWednesdayElement)
+                    {
+                        await azureTable.DeleteAsync(item);
+                    }
+                    break;
+                case "Thursday":
+                    var elementsThursday = await azureTable.ToListAsync();
+                    var removeThursdayElement = elementsThursday.Where(x => x.Thursday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Thursday.Equals(element.ToString()));
+                    foreach (var item in removeThursdayElement)
+                    {
+                        await azureTable.DeleteAsync(item);
+                    }
+                    break;
+                case "Friday":
+                    var elementsFriday = await azureTable.ToListAsync();
+                    var removeFridayElement = elementsFriday.Where(x => x.Friday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Friday.Equals(element.ToString()));
+                    foreach (var item in removeFridayElement)
+                    {
+                        await azureTable.DeleteAsync(item);
+                    }
+                    break;
+                case "Saturday":
+                    var elementsSaturday = await azureTable.ToListAsync();
+                    var removeSaturdayElement = elementsSaturday.Where(x => x.Saturday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Saturday.Equals(element.ToString()));
+                    foreach (var item in removeSaturdayElement)
+                    {
+                        await azureTable.DeleteAsync(item);
+                    }
+                    break;
+                case "Sunday":
+                    var elementsSunday = await azureTable.ToListAsync();
+                    var removeSundayElement = elementsSunday.Where(x => x.Sunday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Sunday.Equals(element.ToString()));
+                    foreach (var item in removeSundayElement)
+                    {
+                        await azureTable.DeleteAsync(item);
+                    }
+                    break;
+            }// End of switch
+            Frame.Navigate(typeof(MainPage));
+        }
+
         public TextBlock GenerateNewTextBox(String element)
         {
             TextBlock tb = new TextBlock
@@ -298,6 +366,7 @@ namespace simpleTimetabling
             Thickness bMargin = b.Margin;
             bMargin.Top = 2;
             b.Margin = bMargin;
+            IsHoldingEnabled = true;
 
             b.Child = tb;
             return b;

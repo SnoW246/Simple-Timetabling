@@ -15,11 +15,13 @@
         <!--Definition of column properties-->
         <Grid.ColumnDefinitions>
             <!--Column #1-->
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="2"/>
             <!--Column #2-->
             <ColumnDefinition Width="*"/>
             <!--Column #3-->
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <!--Column #4-->
+            <ColumnDefinition Width="2"/>
         </Grid.ColumnDefinitions>
 
         <!--Definition of row properties-->
@@ -33,24 +35,27 @@
         </Grid.RowDefinitions>
 
         <!--Definition of border for Row #1 (Top Row)-->
-        <Border Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="1" Background="Transparent" CornerRadius="2" Margin="2"/>
+        <Border Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" Margin="2"/>
         <!--Definition of header in Row #1-->
-        <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" Text="Simple Timetabling" 
+        <TextBlock Grid.ColumnSpan="4" HorizontalAlignment="Center" Text="Simple Timetabling" 
                    TextAlignment="Center" FontStyle="Italic" FontSize="40" Foreground="LightBlue" 
                    TextWrapping="WrapWholeWords" IsTextScaleFactorEnabled="True"/>
 
         <!--Definition of border for Column #1 (Furthermost Left Side Column)-->
-        <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"  Background="Black" CornerRadius="2" Margin="2"/>
+        <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" Margin="2"/>
         <!--Definition of border for Column #3 (Furthermost Right Side Column)-->
-        <Border Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="Gray" CornerRadius="2" Margin="2"/>
+        <Border Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" Margin="2"/>
         <!--Definition of border for Row #3 (Bottom Row)-->
         <Border Grid.Column="1" Grid.Row="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" Margin="2"/>
 
-        <StackPanel Grid.Column="1" Grid.Row="2">
+        <Border Grid.Column="2" Grid.Row="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" Margin="2"/>
+
+
+        <StackPanel Grid.Column="1" Grid.Row="2" Background="Transparent">
             <Button x:Name="FlyoutBtn" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="ExtraBold" Content="+" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="36" UseLayoutRounding="True" Margin="2">
                 <Button.Flyout>
                     <Flyout Placement="Bottom">
-                        <Grid ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Enabled" Background="Transparent">
+                        <Grid ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Enabled" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"/>
@@ -70,31 +75,31 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <Border Grid.Row="0" Grid.ColumnSpan="3" Background="Aqua" CornerRadius="2" Margin="2"/>
+                            <Border Grid.Row="0" Grid.ColumnSpan="3" Background="Transparent" CornerRadius="2" Margin="2"/>
                             <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Add New Lecture" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" Height="30" FontStyle="Italic" FontSize="24"/>
 
-                            <Border Grid.Row="1" Grid.Column="0" Background="White" CornerRadius="2" Margin="2"/>
+                            <Border Grid.Row="1" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
 
-                            <Border Grid.Row="2" Grid.Column="0" Background="Gray" CornerRadius="2" Margin="2"/>
+                            <Border Grid.Row="2" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Abbreviation:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
 
-                            <Border Grid.Row="3" Grid.Column="0" Background="PaleGoldenrod" CornerRadius="2" Margin="2"/>
+                            <Border Grid.Row="3" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
                             <TextBlock Grid.Row="3" Grid.Column="0" Text="Day:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
 
-                            <Border Grid.Row="4" Grid.Column="0" Background="PaleGreen" CornerRadius="2" Margin="2"/>
+                            <Border Grid.Row="4" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="Place:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
 
-                            <Border Grid.Row="5" Grid.Column="0" Background="PaleVioletRed" CornerRadius="2" Margin="2"/>
+                            <Border Grid.Row="5" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
                             <TextBlock Grid.Row="5" Grid.Column="0" Text="Start Time:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
 
-                            <Border Grid.Row="6" Grid.Column="0" Background="PapayaWhip" CornerRadius="2" Margin="2"/>
+                            <Border Grid.Row="6" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
                             <TextBlock Grid.Row="6" Grid.Column="0" Text="End Time:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
 
-                            <Border Grid.Row="7" Grid.Column="0" Background="PaleTurquoise" CornerRadius="2" Margin="2"/>
+                            <Border Grid.Row="7" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
                             <TextBlock Grid.Row="7" Grid.Column="0" Text="Lecturer:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
 
-                            <Border Grid.Row="8" Grid.Column="0" Background="Bisque" CornerRadius="2" Margin="2"/>
+                            <Border Grid.Row="8" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
                             <TextBlock Grid.Row="8" Grid.Column="0" Text="Type:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
 
                             <TextBox Grid.Row="1" Grid.Column="1" x:Name="Name" Margin="2" TextWrapping="Wrap"/>
@@ -203,39 +208,198 @@
                     </Flyout>
                 </Button.Flyout>
             </Button>
+ 
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="2" Background="Transparent">
+            <Button x:Name="DeleteBtn" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="ExtraBold" Content="-" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="36" UseLayoutRounding="True" Margin="2">
+                <Button.Flyout>
+                    <Flyout Placement="Bottom">
+                        <Grid ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Enabled" Background="Transparent">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" Grid.ColumnSpan="3" Background="Transparent" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Delete Lecture" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" Height="30" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="1" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="2" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Abbreviation:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="3" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Day:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="4" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Place:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="5" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Start Time:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="6" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="End Time:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="7" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="7" Grid.Column="0" Text="Lecturer:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <Border Grid.Row="8" Grid.Column="0" Background="Transparent" CornerRadius="2" Margin="2"/>
+                            <TextBlock Grid.Row="8" Grid.Column="0" Text="Type:" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" FontStyle="Italic" FontSize="24"/>
+
+                            <TextBox Grid.Row="1" Grid.Column="1" x:Name="DeleteThisName" Margin="2" TextWrapping="Wrap"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="DeleteThisAbbreviation" Margin="2" TextWrapping="Wrap"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" x:Name="DeleteThisDay" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="2">
+                                <ComboBoxItem Content="Monday"/>
+                                <ComboBoxItem Content="Tuesday"/>
+                                <ComboBoxItem Content="Wednesday"/>
+                                <ComboBoxItem Content="Thursday"/>
+                                <ComboBoxItem Content="Friday"/>
+                                <ComboBoxItem Content="Saturday"/>
+                                <ComboBoxItem Content="Sunday"/>
+                            </ComboBox>
+                            <TextBox Grid.Row="4" Grid.Column="1" x:Name="DeleteThisPlace" Margin="2" TextWrapping="Wrap"/>
+                            <StackPanel Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
+                                <ComboBox Grid.Row="5" Grid.Column="1" x:Name="DeleteThisStartTimeHour" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <ComboBoxItem Content="00"/>
+                                    <ComboBoxItem Content="01"/>
+                                    <ComboBoxItem Content="02"/>
+                                    <ComboBoxItem Content="03"/>
+                                    <ComboBoxItem Content="04"/>
+                                    <ComboBoxItem Content="05"/>
+                                    <ComboBoxItem Content="06"/>
+                                    <ComboBoxItem Content="07"/>
+                                    <ComboBoxItem Content="08"/>
+                                    <ComboBoxItem Content="09"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="11"/>
+                                    <ComboBoxItem Content="12"/>
+                                    <ComboBoxItem Content="13"/>
+                                    <ComboBoxItem Content="14"/>
+                                    <ComboBoxItem Content="15"/>
+                                    <ComboBoxItem Content="16"/>
+                                    <ComboBoxItem Content="17"/>
+                                    <ComboBoxItem Content="18"/>
+                                    <ComboBoxItem Content="19"/>
+                                    <ComboBoxItem Content="20"/>
+                                    <ComboBoxItem Content="21"/>
+                                    <ComboBoxItem Content="22"/>
+                                    <ComboBoxItem Content="23"/>
+                                </ComboBox>
+                                <ComboBox Grid.Row="5" Grid.Column="1" x:Name="DeleteThisStartTimeMin" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2">
+                                    <ComboBoxItem Content="00"/>
+                                    <ComboBoxItem Content="05"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="15"/>
+                                    <ComboBoxItem Content="20"/>
+                                    <ComboBoxItem Content="25"/>
+                                    <ComboBoxItem Content="30"/>
+                                    <ComboBoxItem Content="35"/>
+                                    <ComboBoxItem Content="40"/>
+                                    <ComboBoxItem Content="45"/>
+                                    <ComboBoxItem Content="50"/>
+                                    <ComboBoxItem Content="55"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
+                                <ComboBox Grid.Row="6" Grid.Column="1" x:Name="DeleteThisEndTimeHour" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <ComboBoxItem Content="00"/>
+                                    <ComboBoxItem Content="01"/>
+                                    <ComboBoxItem Content="02"/>
+                                    <ComboBoxItem Content="03"/>
+                                    <ComboBoxItem Content="04"/>
+                                    <ComboBoxItem Content="05"/>
+                                    <ComboBoxItem Content="06"/>
+                                    <ComboBoxItem Content="07"/>
+                                    <ComboBoxItem Content="08"/>
+                                    <ComboBoxItem Content="09"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="11"/>
+                                    <ComboBoxItem Content="12"/>
+                                    <ComboBoxItem Content="13"/>
+                                    <ComboBoxItem Content="14"/>
+                                    <ComboBoxItem Content="15"/>
+                                    <ComboBoxItem Content="16"/>
+                                    <ComboBoxItem Content="17"/>
+                                    <ComboBoxItem Content="18"/>
+                                    <ComboBoxItem Content="19"/>
+                                    <ComboBoxItem Content="20"/>
+                                    <ComboBoxItem Content="21"/>
+                                    <ComboBoxItem Content="22"/>
+                                    <ComboBoxItem Content="23"/>
+                                </ComboBox>
+                                <ComboBox Grid.Row="6" Grid.Column="1" x:Name="DeleteThisEndTimeMin" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2">
+                                    <ComboBoxItem Content="00"/>
+                                    <ComboBoxItem Content="05"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="15"/>
+                                    <ComboBoxItem Content="20"/>
+                                    <ComboBoxItem Content="25"/>
+                                    <ComboBoxItem Content="30"/>
+                                    <ComboBoxItem Content="35"/>
+                                    <ComboBoxItem Content="40"/>
+                                    <ComboBoxItem Content="45"/>
+                                    <ComboBoxItem Content="50"/>
+                                    <ComboBoxItem Content="55"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <TextBox Grid.Row="7" Grid.Column="1" x:Name="DeleteThisLecturer" Margin="2" TextWrapping="Wrap"/>
+                            <ComboBox Grid.Row="8" Grid.Column="1" x:Name="DeleteThisType" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="2">
+                                <ComboBoxItem Content="Lecture"/>
+                                <ComboBoxItem Content="Practical"/>
+                            </ComboBox>
+                            <Button x:Name="DeleteThisBtn" Grid.Row="1" Grid.Column="2" Grid.RowSpan="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="ExtraBold" Content="-" VerticalContentAlignment="Center" FontStretch="ExtraExpanded" FontSize="36" UseLayoutRounding="True" Margin="2" Click="DeleteThisBtn_ClickAsync"/>
+                        </Grid>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
         </StackPanel>
 
         <!--Definition of border for Column #2 (Center Timetable Column)-->
-        <Border Grid.Column="1" Grid.Row="1" CornerRadius="2" Margin="2">
+        <Border Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" CornerRadius="2" Margin="2">
             <Image Source="Assets/OldBooksBckground.jpg" Stretch="UniformToFill"/>
         </Border>
 
-        <ScrollViewer Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.HorizontalScrollMode="Enabled" >
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.HorizontalScrollMode="Enabled" >
             <Grid Grid.Column="1" Grid.Row="1" CornerRadius="2">
 
                 <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Vertical">
-                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Height="75" CornerRadius="2" Margin="0,10" Background="Azure" Opacity="0.7">
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Height="75" CornerRadius="2" Margin="0,10" Background="Transparent">
                         <TextBlock x:Name="monday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
-                             Text="Monday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
-                             FontSize="30" TextAlignment="Center" Margin="2" />
+                             Text="Monday" VerticalAlignment="Bottom" Width="160" FontStyle="Italic" 
+                             FontSize="30" TextAlignment="Center" Foreground="LightBlue" Margin="2" />
                         <TextBlock x:Name="tuesday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
-                        Text="Tuesday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
-                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                        Text="Tuesday" VerticalAlignment="Bottom" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Foreground="LightBlue" Margin="2"/>
                         <TextBlock x:Name="wednesday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
-                        Text="Wednesday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
-                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                        Text="Wednesday" VerticalAlignment="Bottom" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Foreground="LightBlue" Margin="2"/>
                         <TextBlock x:Name="thursday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
-                        Text="Thursday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
-                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                        Text="Thursday" VerticalAlignment="Bottom" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Foreground="LightBlue" Margin="2"/>
                         <TextBlock x:Name="friday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
-                        Text="Friday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
-                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                        Text="Friday" VerticalAlignment="Bottom" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Foreground="LightBlue" Margin="2"/>
                         <TextBlock x:Name="saturday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
-                        Text="Saturday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
-                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                        Text="Saturday" VerticalAlignment="Bottom" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Foreground="LightBlue" Margin="2"/>
                         <TextBlock x:Name="sunday" HorizontalAlignment="Center" Height="60" TextWrapping="Wrap" 
-                        Text="Sunday" VerticalAlignment="Center" Width="160" FontStyle="Italic" 
-                        FontSize="30" TextAlignment="Center" Margin="2"/>
+                        Text="Sunday" VerticalAlignment="Bottom" Width="160" FontStyle="Italic" 
+                        FontSize="30" TextAlignment="Center" Foreground="LightBlue" Margin="2"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2">
                         <StackPanel x:Name="mondayStack" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" CornerRadius="2" Margin="2" Orientation="Vertical" Background="Red" Opacity="0.7"/>
