@@ -8,8 +8,6 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace simpleTimetabling
 {
     public sealed partial class RegistrationPage : Page
@@ -164,11 +162,6 @@ namespace simpleTimetabling
                 }
                 else
                 {
-                    var confirmation = new MessageDialog("Continue");
-                    confirmation.Title = "Continue";
-                    confirmation.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
-                    var choice = await confirmation.ShowAsync();
-
                     // Declare DOB variable & collect relative selected box items
                     var dob = dobDay.SelectionBoxItem + "/" + dobMonth.SelectionBoxItem + "/" + dobYear.SelectionBoxItem;
                     // Upload data to Azure Cloud Database table

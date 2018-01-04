@@ -188,7 +188,7 @@ namespace simpleTimetabling
 
         private async void AddNewBtn_ClickAsync(object sender, RoutedEventArgs e)
         {
-            if (Day.SelectionBoxItem != null)
+            if (Day.SelectionBoxItem != null && Abbreviation.Text != "" && Name.Text != "" && Place.Text != "" && StartTimeHour.SelectionBoxItem != null && StartTimeMin.SelectionBoxItem != null && EndTimeHour.SelectionBoxItem != null && EndTimeMin.SelectionBoxItem != null && Type.SelectionBoxItem != null && Lecturer.Text != "")
             {
                 Border b = new Border();
                 b.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.DarkGray);
@@ -261,77 +261,85 @@ namespace simpleTimetabling
             }
         }
 
-        //protected virtual async Task DeleteAsync(string ID);
-
         private async void DeleteThisBtn_ClickAsync(object sender, RoutedEventArgs e)
         {
-            var element = DeleteThisAbbreviation.Text.ToString().ToUpper() + " (" + DeleteThisName.Text + ")" + "\r\n" +
-                    DeleteThisType.SelectionBoxItem.ToString() + "\r\n" + DeleteThisPlace.Text + "\r\n" +
-                    DeleteThisStartTimeHour.SelectionBoxItem.ToString() + ":" + DeleteThisStartTimeMin.SelectionBoxItem.ToString() + " - " +
-                    DeleteThisEndTimeHour.SelectionBoxItem.ToString() + ":" + DeleteThisEndTimeMin.SelectionBoxItem.ToString() + "\r\n" +
-                    DeleteThisLecturer.Text;
-
-            string caseSwitch = DeleteThisDay.SelectionBoxItem.ToString();
-            switch (caseSwitch)
+            if (DeleteThisDay.SelectionBoxItem != null && DeleteThisAbbreviation.Text != "" && DeleteThisName.Text != "" && DeleteThisPlace.Text != "" && DeleteThisStartTimeHour.SelectionBoxItem != null && DeleteThisStartTimeMin.SelectionBoxItem != null && DeleteThisEndTimeHour.SelectionBoxItem != null && DeleteThisEndTimeMin.SelectionBoxItem != null && DeleteThisType.SelectionBoxItem != null && Lecturer.Text != "")
             {
-                case "Monday":
-                    var elementsMonday = await azureTable.ToListAsync();
-                    var removeMondayElement = elementsMonday.Where(x => x.Monday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Monday.Equals(element.ToString()));
-                    foreach (var item in removeMondayElement)
-                    {
-                        await azureTable.DeleteAsync(item);
-                    }
-                    break;
-                case "Tuesday":
-                    var elementsTuesday = await azureTable.ToListAsync();
-                    var removeTuesdayElement = elementsTuesday.Where(x => x.Tuesday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Tuesday.Equals(element.ToString()));
-                    foreach (var item in removeTuesdayElement)
-                    {
-                        await azureTable.DeleteAsync(item);
-                    }
-                    break;
-                case "Wednesday":
-                    var elementsWednesday = await azureTable.ToListAsync();
-                    var removeWednesdayElement = elementsWednesday.Where(x => x.Wednesday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Wednesday.Equals(element.ToString()));
-                    foreach (var item in removeWednesdayElement)
-                    {
-                        await azureTable.DeleteAsync(item);
-                    }
-                    break;
-                case "Thursday":
-                    var elementsThursday = await azureTable.ToListAsync();
-                    var removeThursdayElement = elementsThursday.Where(x => x.Thursday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Thursday.Equals(element.ToString()));
-                    foreach (var item in removeThursdayElement)
-                    {
-                        await azureTable.DeleteAsync(item);
-                    }
-                    break;
-                case "Friday":
-                    var elementsFriday = await azureTable.ToListAsync();
-                    var removeFridayElement = elementsFriday.Where(x => x.Friday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Friday.Equals(element.ToString()));
-                    foreach (var item in removeFridayElement)
-                    {
-                        await azureTable.DeleteAsync(item);
-                    }
-                    break;
-                case "Saturday":
-                    var elementsSaturday = await azureTable.ToListAsync();
-                    var removeSaturdayElement = elementsSaturday.Where(x => x.Saturday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Saturday.Equals(element.ToString()));
-                    foreach (var item in removeSaturdayElement)
-                    {
-                        await azureTable.DeleteAsync(item);
-                    }
-                    break;
-                case "Sunday":
-                    var elementsSunday = await azureTable.ToListAsync();
-                    var removeSundayElement = elementsSunday.Where(x => x.Sunday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Sunday.Equals(element.ToString()));
-                    foreach (var item in removeSundayElement)
-                    {
-                        await azureTable.DeleteAsync(item);
-                    }
-                    break;
-            }// End of switch
-            Frame.Navigate(typeof(MainPage));
+                var element = DeleteThisAbbreviation.Text.ToString().ToUpper() + " (" + DeleteThisName.Text + ")" + "\r\n" +
+                        DeleteThisType.SelectionBoxItem.ToString() + "\r\n" + DeleteThisPlace.Text + "\r\n" +
+                        DeleteThisStartTimeHour.SelectionBoxItem.ToString() + ":" + DeleteThisStartTimeMin.SelectionBoxItem.ToString() + " - " +
+                        DeleteThisEndTimeHour.SelectionBoxItem.ToString() + ":" + DeleteThisEndTimeMin.SelectionBoxItem.ToString() + "\r\n" +
+                        DeleteThisLecturer.Text;
+
+                string caseSwitch = DeleteThisDay.SelectionBoxItem.ToString();
+                switch (caseSwitch)
+                {
+                    case "Monday":
+                        var elementsMonday = await azureTable.ToListAsync();
+                        var removeMondayElement = elementsMonday.Where(x => x.Monday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Monday.Equals(element.ToString()));
+                        foreach (var item in removeMondayElement)
+                        {
+                            await azureTable.DeleteAsync(item);
+                        }
+                        break;
+                    case "Tuesday":
+                        var elementsTuesday = await azureTable.ToListAsync();
+                        var removeTuesdayElement = elementsTuesday.Where(x => x.Tuesday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Tuesday.Equals(element.ToString()));
+                        foreach (var item in removeTuesdayElement)
+                        {
+                            await azureTable.DeleteAsync(item);
+                        }
+                        break;
+                    case "Wednesday":
+                        var elementsWednesday = await azureTable.ToListAsync();
+                        var removeWednesdayElement = elementsWednesday.Where(x => x.Wednesday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Wednesday.Equals(element.ToString()));
+                        foreach (var item in removeWednesdayElement)
+                        {
+                            await azureTable.DeleteAsync(item);
+                        }
+                        break;
+                    case "Thursday":
+                        var elementsThursday = await azureTable.ToListAsync();
+                        var removeThursdayElement = elementsThursday.Where(x => x.Thursday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Thursday.Equals(element.ToString()));
+                        foreach (var item in removeThursdayElement)
+                        {
+                            await azureTable.DeleteAsync(item);
+                        }
+                        break;
+                    case "Friday":
+                        var elementsFriday = await azureTable.ToListAsync();
+                        var removeFridayElement = elementsFriday.Where(x => x.Friday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Friday.Equals(element.ToString()));
+                        foreach (var item in removeFridayElement)
+                        {
+                            await azureTable.DeleteAsync(item);
+                        }
+                        break;
+                    case "Saturday":
+                        var elementsSaturday = await azureTable.ToListAsync();
+                        var removeSaturdayElement = elementsSaturday.Where(x => x.Saturday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Saturday.Equals(element.ToString()));
+                        foreach (var item in removeSaturdayElement)
+                        {
+                            await azureTable.DeleteAsync(item);
+                        }
+                        break;
+                    case "Sunday":
+                        var elementsSunday = await azureTable.ToListAsync();
+                        var removeSundayElement = elementsSunday.Where(x => x.Sunday != null && x.UserID.Equals(UniqueUser.UniqueID) && x.Sunday.Equals(element.ToString()));
+                        foreach (var item in removeSundayElement)
+                        {
+                            await azureTable.DeleteAsync(item);
+                        }
+                        break;
+                }// End of switch
+                // Reload main page which syncs with azure DB async
+                Frame.Navigate(typeof(MainPage));
+            }
+
+            else
+            {
+                Windows.UI.Popups.MessageDialog msgWarning = new Windows.UI.Popups.MessageDialog("You must fill in the blanks!", "Error!");
+                await msgWarning.ShowAsync();
+            }
         }
 
         public TextBlock GenerateNewTextBox(String element)
